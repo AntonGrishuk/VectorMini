@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		951D1955231F1A5900AF62C0 /* DBController.m in Sources */ = {isa = PBXBuildFile; fileRef = 951D1953231F1A5900AF62C0 /* DBController.m */; };
 		959AC965231AC59700BE6C9D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 959AC964231AC59700BE6C9D /* AppDelegate.m */; };
 		959AC968231AC59700BE6C9D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 959AC967231AC59700BE6C9D /* ViewController.m */; };
 		959AC96B231AC59700BE6C9D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 959AC969231AC59700BE6C9D /* Main.storyboard */; };
@@ -19,6 +20,8 @@
 /* Begin PBXFileReference section */
 		49D5D0DC7B6907E19D253D87 /* Pods-VectorMini.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VectorMini.debug.xcconfig"; path = "Target Support Files/Pods-VectorMini/Pods-VectorMini.debug.xcconfig"; sourceTree = "<group>"; };
 		81A812DCB60D6BF28507FF91 /* Pods_VectorMini.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VectorMini.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		951D1953231F1A5900AF62C0 /* DBController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBController.m; sourceTree = "<group>"; };
+		951D1954231F1A5900AF62C0 /* DBController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBController.h; sourceTree = "<group>"; };
 		959AC960231AC59700BE6C9D /* VectorMini.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VectorMini.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		959AC963231AC59700BE6C9D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		959AC964231AC59700BE6C9D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -58,7 +61,6 @@
 				49D5D0DC7B6907E19D253D87 /* Pods-VectorMini.debug.xcconfig */,
 				C40C9DCF9DC8D9C1C959DAA2 /* Pods-VectorMini.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -83,6 +85,8 @@
 		959AC962231AC59700BE6C9D /* VectorMini */ = {
 			isa = PBXGroup;
 			children = (
+				951D1954231F1A5900AF62C0 /* DBController.h */,
+				951D1953231F1A5900AF62C0 /* DBController.m */,
 				959AC963231AC59700BE6C9D /* AppDelegate.h */,
 				959AC964231AC59700BE6C9D /* AppDelegate.m */,
 				959AC966231AC59700BE6C9D /* ViewController.h */,
@@ -213,6 +217,7 @@
 				959AC968231AC59700BE6C9D /* ViewController.m in Sources */,
 				959AC973231AC59800BE6C9D /* main.m in Sources */,
 				959AC965231AC59700BE6C9D /* AppDelegate.m in Sources */,
+				951D1955231F1A5900AF62C0 /* DBController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
