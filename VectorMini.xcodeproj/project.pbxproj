@@ -15,11 +15,12 @@
 		951D196C231F1BD000AF62C0 /* CanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = 951D1963231F1BD000AF62C0 /* CanvasView.m */; };
 		951D196D231F1BD000AF62C0 /* CAShapeLayer+Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 951D1967231F1BD000AF62C0 /* CAShapeLayer+Image.m */; };
 		959AC965231AC59700BE6C9D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 959AC964231AC59700BE6C9D /* AppDelegate.m */; };
-		959AC968231AC59700BE6C9D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 959AC967231AC59700BE6C9D /* ViewController.m */; };
 		959AC96B231AC59700BE6C9D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 959AC969231AC59700BE6C9D /* Main.storyboard */; };
 		959AC96D231AC59800BE6C9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 959AC96C231AC59800BE6C9D /* Assets.xcassets */; };
 		959AC970231AC59800BE6C9D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 959AC96E231AC59800BE6C9D /* LaunchScreen.storyboard */; };
 		959AC973231AC59800BE6C9D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 959AC972231AC59800BE6C9D /* main.m */; };
+		95D098CE23204ED4004C7842 /* ProjectsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D098CD23204ED4004C7842 /* ProjectsViewController.m */; };
+		95D098D723205CDC004C7842 /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D098D623205CDC004C7842 /* Project.m */; };
 		E3A1A8E3C743BA8CAC1929A2 /* Pods_VectorMini.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81A812DCB60D6BF28507FF91 /* Pods_VectorMini.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,13 +45,15 @@
 		959AC960231AC59700BE6C9D /* VectorMini.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VectorMini.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		959AC963231AC59700BE6C9D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		959AC964231AC59700BE6C9D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		959AC966231AC59700BE6C9D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		959AC967231AC59700BE6C9D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		959AC96A231AC59700BE6C9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		959AC96C231AC59800BE6C9D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		959AC96F231AC59800BE6C9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		959AC971231AC59800BE6C9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		959AC972231AC59800BE6C9D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		95D098CC23204ED4004C7842 /* ProjectsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProjectsViewController.h; sourceTree = "<group>"; };
+		95D098CD23204ED4004C7842 /* ProjectsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProjectsViewController.m; sourceTree = "<group>"; };
+		95D098D523205CDC004C7842 /* Project.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
+		95D098D623205CDC004C7842 /* Project.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Project.m; sourceTree = "<group>"; };
 		C40C9DCF9DC8D9C1C959DAA2 /* Pods-VectorMini.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VectorMini.release.xcconfig"; path = "Target Support Files/Pods-VectorMini/Pods-VectorMini.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -160,8 +163,8 @@
 		951D1970231F1C6800AF62C0 /* Projects */ = {
 			isa = PBXGroup;
 			children = (
-				959AC966231AC59700BE6C9D /* ViewController.h */,
-				959AC967231AC59700BE6C9D /* ViewController.m */,
+				95D098CC23204ED4004C7842 /* ProjectsViewController.h */,
+				95D098CD23204ED4004C7842 /* ProjectsViewController.m */,
 			);
 			path = Projects;
 			sourceTree = "<group>";
@@ -171,6 +174,8 @@
 			children = (
 				951D1954231F1A5900AF62C0 /* DBController.h */,
 				951D1953231F1A5900AF62C0 /* DBController.m */,
+				95D098D523205CDC004C7842 /* Project.h */,
+				95D098D623205CDC004C7842 /* Project.m */,
 			);
 			path = DataBase;
 			sourceTree = "<group>";
@@ -326,10 +331,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95D098CE23204ED4004C7842 /* ProjectsViewController.m in Sources */,
 				951D1968231F1BD000AF62C0 /* Curve.m in Sources */,
-				959AC968231AC59700BE6C9D /* ViewController.m in Sources */,
 				959AC973231AC59800BE6C9D /* main.m in Sources */,
 				951D196B231F1BD000AF62C0 /* CanvasModelController.m in Sources */,
+				95D098D723205CDC004C7842 /* Project.m in Sources */,
 				951D196A231F1BD000AF62C0 /* CanvasViewController.m in Sources */,
 				951D196C231F1BD000AF62C0 /* CanvasView.m in Sources */,
 				959AC965231AC59700BE6C9D /* AppDelegate.m in Sources */,
@@ -488,7 +494,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Grant.VectorMini;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -507,7 +513,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Grant.VectorMini;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

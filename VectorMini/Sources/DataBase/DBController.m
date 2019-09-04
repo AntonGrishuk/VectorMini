@@ -8,6 +8,7 @@
 
 #import "DBController.h"
 #import <FMDB/FMDB.h>
+#import "Project.h"
 
 @interface DBController()
 
@@ -18,6 +19,8 @@
 @end
 
 @implementation DBController
+
+#pragma mark - Initializations and deallocation
 
 - (instancetype)init
 {
@@ -39,6 +42,8 @@
     });
 }
 
+#pragma mark - Public
+
 - (void)start {
     dispatch_async(self.workQueue, ^{
         if ([self dbExists]) {
@@ -50,6 +55,37 @@
         }
     });
 }
+
+- (void)fetchProjects:(void(^)(NSArray *))completion {
+    dispatch_async(self.workQueue, ^{
+        FMResultSet *rs = [self.db executeQuery:@"SELECT * FROM projects ORDER BY id ASC"];
+        NSMutableArray *results = [NSMutableArray array];
+        while ([rs next]) {
+            NSInteger projId = [rs intForColumn:@"id"];
+            NSString *projectName = [rs stringForColumn:@"name"];
+            Project *p = [[Project alloc] init:projId :projectName];
+            [results addObject:p];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(results);
+        });
+        
+    });
+}
+
+- (void)addProject:(void(^)(NSString *))completion {
+    dispatch_async(self.workQueue, ^{
+        NSDateFormatter * formatter =  [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MMM-dd HH:mm:ss:SSS"];
+        NSString *dateString = [formatter stringFromDate:[NSDate date]];
+        [self.db executeUpdate:@"INSERT INTO projects(name) VALUES(?);", dateString];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(dateString);
+        });
+    });
+}
+
+#pragma mark - Private
 
 - (void)openDB {
     self.db = [FMDatabase databaseWithURL:self.dbUrl];

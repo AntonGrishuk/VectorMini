@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface DBController : NSObject
 
 - (void)start;
+- (void)fetchProjects:(void(^)(NSArray *))completion;
+- (void)addProject:(void(^)(NSString *))completion;
 
 @end
 
