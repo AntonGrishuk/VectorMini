@@ -13,6 +13,7 @@
 
 @property (nonatomic, strong) FMDatabase *db;
 @property (nonatomic, strong) dispatch_queue_t workQueue;
+@property (nonatomic, strong) NSURL *dbUrl;
 
 @end
 
@@ -24,26 +25,42 @@
     if (self) {
         dispatch_queue_attr_t  attr = dispatch_queue_attr_make_with_qos_class(DISPATCH_QUEUE_SERIAL, QOS_CLASS_USER_INITIATED, -1);
         _workQueue = dispatch_queue_create("com.database.workQueue", attr);
+        
+         NSURL * documnetDirUrl = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+        _dbUrl = [documnetDirUrl URLByAppendingPathComponent:@"projects.db"];
     }
     return self;
 }
 
+- (void)dealloc
+{
+    dispatch_async(self.workQueue, ^{
+        [self.db close];
+    });
+}
+
 - (void)start {
     dispatch_async(self.workQueue, ^{
-        [self openDB];
-        [self turnOnForeignKey];
-        [self createTables];
+        if ([self dbExists]) {
+            [self openDB];
+        } else {
+            [self openDB];
+            [self turnOnForeignKey];
+            [self createTables];
+        }
     });
 }
 
 - (void)openDB {
-    NSURL * documnetDirUrl = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-    NSURL *dbUrl = [documnetDirUrl URLByAppendingPathComponent:@"projects.db"];
-    self.db = [FMDatabase databaseWithURL:dbUrl];
+    self.db = [FMDatabase databaseWithURL:self.dbUrl];
     if (![self.db open]) {
         self.db = nil;
         return;
     }
+}
+
+- (BOOL)dbExists {
+    return [[NSFileManager defaultManager] fileExistsAtPath:[self.dbUrl path]];
 }
 
 - (void)turnOnForeignKey {

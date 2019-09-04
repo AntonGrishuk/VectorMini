@@ -80,6 +80,7 @@
 
 - (void)curvePathDidFinished:(nonnull CGPathRef)path {
     [self.delegate canvasModelDidEndPath:path];
+    [self.curves addObject:self.currentCurve];
 }
 
 @end
