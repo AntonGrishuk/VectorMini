@@ -6,13 +6,16 @@
 //  Copyright © 2019 Anton Grishuk. All rights reserved.
 //
 #import "ProjectsViewController.h"
+#import "CanvasContainerViewController.h"
 #import "DBController.h"
 #import "Project.h"
 
 @interface ProjectsViewController ()<UITableViewDataSource, UITableViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UITableView *tabelView;
 @property (nonatomic, strong) DBController *dbController;
 @property (nonatomic, strong) NSMutableArray *projects;
+@property (nonatomic, assign) NSInteger selectedRow;
 
 @end
 
@@ -34,15 +37,20 @@
     [self fetchProjects];
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"CanvasContainerSegue"]) {
+        Project *project = [self.projects objectAtIndex:self.selectedRow];
+        id canvasContainer = [segue destinationViewController];
+        if ([canvasContainer isKindOfClass:[CanvasContainerViewController class]]) {
+            [(CanvasContainerViewController *)canvasContainer setSelectedProject: project];
+        }
+    }
 }
-*/
+
 - (IBAction)onAddProject:(UIBarButtonItem *)sender {
     __weak ProjectsViewController *weakSelf = self;
     [self.dbController addProject:^(NSString * _Nonnull projectName) {
@@ -79,6 +87,11 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     Project *p = [self.projects objectAtIndex:indexPath.row];
     cell.textLabel.text = p.name;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    self.selectedRow = indexPath.row;
+    [self performSegueWithIdentifier:@"CanvasContainerSegue" sender:self];
 }
 
 @end

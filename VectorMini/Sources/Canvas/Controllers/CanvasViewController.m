@@ -53,6 +53,16 @@
     [super viewDidAppear:animated];
 }
 
+#pragma mark - Public
+
+- (void)selectCurveDrawTool {
+    [self.modelController setCurveType:CurveTypeCurve];
+}
+
+- (void)selectRectangleDrawTool {
+    [self.modelController setCurveType:CurveTypeRectangle];
+}
+
 #pragma mark - Touches handling
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {

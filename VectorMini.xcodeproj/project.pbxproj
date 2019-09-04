@@ -21,6 +21,8 @@
 		959AC973231AC59800BE6C9D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 959AC972231AC59800BE6C9D /* main.m */; };
 		95D098CE23204ED4004C7842 /* ProjectsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D098CD23204ED4004C7842 /* ProjectsViewController.m */; };
 		95D098D723205CDC004C7842 /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D098D623205CDC004C7842 /* Project.m */; };
+		95D098DB232063CC004C7842 /* CanvasContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D098DA232063CC004C7842 /* CanvasContainerViewController.m */; };
+		95D098DF23206578004C7842 /* CurvesListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D098DE23206578004C7842 /* CurvesListTableViewController.m */; };
 		E3A1A8E3C743BA8CAC1929A2 /* Pods_VectorMini.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81A812DCB60D6BF28507FF91 /* Pods_VectorMini.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +56,10 @@
 		95D098CD23204ED4004C7842 /* ProjectsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProjectsViewController.m; sourceTree = "<group>"; };
 		95D098D523205CDC004C7842 /* Project.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
 		95D098D623205CDC004C7842 /* Project.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Project.m; sourceTree = "<group>"; };
+		95D098D9232063CC004C7842 /* CanvasContainerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CanvasContainerViewController.h; sourceTree = "<group>"; };
+		95D098DA232063CC004C7842 /* CanvasContainerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CanvasContainerViewController.m; sourceTree = "<group>"; };
+		95D098DD23206578004C7842 /* CurvesListTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurvesListTableViewController.h; sourceTree = "<group>"; };
+		95D098DE23206578004C7842 /* CurvesListTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurvesListTableViewController.m; sourceTree = "<group>"; };
 		C40C9DCF9DC8D9C1C959DAA2 /* Pods-VectorMini.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VectorMini.release.xcconfig"; path = "Target Support Files/Pods-VectorMini/Pods-VectorMini.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -140,10 +146,12 @@
 		951D196E231F1BD900AF62C0 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				95D098DC23206526004C7842 /* CurvesList */,
 				951D1972231F1D5700AF62C0 /* Entry point */,
 				951D1965231F1BD000AF62C0 /* Categories */,
 				951D1971231F1CD800AF62C0 /* DataBase */,
 				951D1970231F1C6800AF62C0 /* Projects */,
+				95D098D82320635D004C7842 /* CanvasContainer */,
 				951D1956231F1BD000AF62C0 /* Canvas */,
 			);
 			path = Sources;
@@ -215,6 +223,24 @@
 				951D196E231F1BD900AF62C0 /* Sources */,
 			);
 			path = VectorMini;
+			sourceTree = "<group>";
+		};
+		95D098D82320635D004C7842 /* CanvasContainer */ = {
+			isa = PBXGroup;
+			children = (
+				95D098D9232063CC004C7842 /* CanvasContainerViewController.h */,
+				95D098DA232063CC004C7842 /* CanvasContainerViewController.m */,
+			);
+			path = CanvasContainer;
+			sourceTree = "<group>";
+		};
+		95D098DC23206526004C7842 /* CurvesList */ = {
+			isa = PBXGroup;
+			children = (
+				95D098DD23206578004C7842 /* CurvesListTableViewController.h */,
+				95D098DE23206578004C7842 /* CurvesListTableViewController.m */,
+			);
+			path = CurvesList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -333,12 +359,14 @@
 			files = (
 				95D098CE23204ED4004C7842 /* ProjectsViewController.m in Sources */,
 				951D1968231F1BD000AF62C0 /* Curve.m in Sources */,
+				95D098DF23206578004C7842 /* CurvesListTableViewController.m in Sources */,
 				959AC973231AC59800BE6C9D /* main.m in Sources */,
 				951D196B231F1BD000AF62C0 /* CanvasModelController.m in Sources */,
 				95D098D723205CDC004C7842 /* Project.m in Sources */,
 				951D196A231F1BD000AF62C0 /* CanvasViewController.m in Sources */,
 				951D196C231F1BD000AF62C0 /* CanvasView.m in Sources */,
 				959AC965231AC59700BE6C9D /* AppDelegate.m in Sources */,
+				95D098DB232063CC004C7842 /* CanvasContainerViewController.m in Sources */,
 				951D196D231F1BD000AF62C0 /* CAShapeLayer+Image.m in Sources */,
 				951D1955231F1A5900AF62C0 /* DBController.m in Sources */,
 				951D1969231F1BD000AF62C0 /* Rectangle.m in Sources */,
