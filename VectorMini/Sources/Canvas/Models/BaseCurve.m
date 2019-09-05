@@ -11,6 +11,7 @@
 @interface BaseCurve ()
 
 @property (nonatomic, assign) NSInteger iD;
+@property (nonatomic, assign) CGFloat unixDate;
 
 @end
 
@@ -23,12 +24,20 @@
 - (NSArray *)getPoints{return nil;}
 - (UIColor *)color{return nil;}
 
-- (void)setupId:(NSUInteger)iD {
+- (void)setupId:(NSInteger)iD {
     self.iD = iD;
 }
 
-- (NSUInteger)getId {
+- (NSInteger)getId {
     return self.iD;
+}
+
+- (CGFloat)getUnixDate {
+    return self.unixDate;
+}
+
+- (void)setupUnixDate:(CGFloat)date {
+    self.unixDate = date;
 }
 
 @end

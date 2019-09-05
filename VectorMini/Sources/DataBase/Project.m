@@ -16,7 +16,7 @@
 
 @implementation Project
 
-- (instancetype)init:(NSInteger)idNumber :(NSString *)name {
+- (instancetype)init:(NSInteger)idNumber name:(NSString *)name {
     self = [super init];
     if (self) {
         _idNumber = idNumber;

@@ -26,6 +26,15 @@
     [super viewWillAppear:animated];
     [[self canvasViewController] setDelegate:self];
     
+    NSInteger projId = [self.project idNumber];
+    [self.dbController fetchCurves:projId completion:^(NSArray * _Nonnull curves) {
+        NSLog(@"%@", curves);
+    }];
+    
+    [self.dbController fetchRectangles:projId completion:^(NSArray * _Nonnull rects) {
+        NSLog(@"%@", rects);
+    }];
+    
 }
 
 - (void)setSelectedProject:(Project *)project {

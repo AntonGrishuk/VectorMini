@@ -36,10 +36,11 @@
     return self;
 }
 
-- (instancetype)init:(NSArray *)points {
+- (instancetype)init:(NSArray *)points hexColor:(NSUInteger)hexColor {
     self = [self init];
     if (self) {
         _points = [NSMutableArray arrayWithArray:points];
+        _hexColor = hexColor;
     }
     return self;
 }

@@ -25,10 +25,12 @@
 {
     self = [super init];
     if (self) {
-        dispatch_queue_attr_t  attr = dispatch_queue_attr_make_with_qos_class(DISPATCH_QUEUE_SERIAL, QOS_CLASS_USER_INITIATED, -1);
+        dispatch_queue_attr_t  attr = dispatch_queue_attr_make_with_qos_class(DISPATCH_QUEUE_SERIAL,
+                                                                              QOS_CLASS_USER_INITIATED, -1);
         _workQueue = dispatch_queue_create("com.database.workQueue", attr);
         
-         NSURL * documnetDirUrl = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+         NSURL * documnetDirUrl = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
+                                                                          inDomains:NSUserDomainMask] lastObject];
         _dbUrl = [documnetDirUrl URLByAppendingPathComponent:@"projects.db"];
     }
     return self;
@@ -60,11 +62,81 @@
         FMResultSet *rs = [self.db executeQuery:@"SELECT * FROM projects ORDER BY id ASC"];
         NSMutableArray *results = [NSMutableArray array];
         while ([rs next]) {
-            NSInteger projId = [rs intForColumn:@"id"];
-            NSString *projectName = [rs stringForColumn:@"name"];
-            Project *p = [[Project alloc] init:projId :projectName];
-            [results addObject:p];
+            @autoreleasepool {
+                NSInteger projId = [rs intForColumn:@"id"];
+                NSString *projectName = [rs stringForColumn:@"name"];
+                Project *p = [[Project alloc] init:projId name:projectName];
+                [results addObject:p];
+            }
         }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(results);
+        });
+    });
+}
+
+- (void)fetchCurves:(NSInteger)projectId completion:(void(^)(NSArray *))completion {
+    dispatch_async(self.workQueue, ^{
+        FMResultSet *rs = [self.db executeQuery:
+                           @"SELECT * FROM lines WHERE projectId = ? AND visible = 1  ORDER BY id ASC", @(projectId)];
+        NSMutableArray *results = [NSMutableArray array];
+        
+        while ([rs next]) {
+            @autoreleasepool {
+                NSInteger lineId = [rs intForColumn:@"id"];
+                NSInteger color = [rs intForColumn:@"color"];
+                double date = [rs doubleForColumn:@"date"];
+                
+                FMResultSet *pointsRs = [self.db executeQuery:
+                                   @"SELECT * FROM linesPoints WHERE lineId = ? ORDER BY id ASC", @(lineId)];
+                
+                NSMutableArray *points = [NSMutableArray array];
+                
+                while ([pointsRs next]) {
+                    CGFloat x = (CGFloat)[pointsRs doubleForColumn: @"x"];
+                    CGFloat y = (CGFloat)[pointsRs doubleForColumn: @"y"];
+                    CGPoint point = CGPointMake(x, y);
+                    [points addObject:@(point)];
+                }
+                
+                Curve *c = [[Curve alloc] init:points hexColor:color];
+                [c setupUnixDate:date];
+                [c setupId:lineId];
+                
+                [results addObject:c];
+            }
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(results);
+        });
+    });
+}
+
+- (void)fetchRectangles:(NSInteger)projectId completion:(void(^)(NSArray *))completion {
+    dispatch_async(self.workQueue, ^{
+        FMResultSet *rs = [self.db executeQuery:
+                           @"SELECT * FROM rectangles WHERE projectId = ? AND visible = 1  ORDER BY id ASC", @(projectId)];
+        NSMutableArray *results = [NSMutableArray array];
+        
+        while ([rs next]) {
+            @autoreleasepool {
+                NSInteger rectId = [rs intForColumn:@"id"];
+                NSInteger color = [rs intForColumn:@"color"];
+                double date = [rs doubleForColumn:@"date"];
+                double x = [rs doubleForColumn:@"x"];
+                double y = [rs doubleForColumn:@"y"];
+                double width = [rs doubleForColumn:@"width"];
+                double height = [rs doubleForColumn:@"height"];
+                
+                Rectangle *r = [[Rectangle alloc] init:CGRectMake(x, y, width, height) hexColor:color];
+                [r setupUnixDate:date];
+                [r setupId:rectId];
+                
+                [results addObject:r];
+            }
+        }
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             completion(results);
         });
@@ -77,7 +149,7 @@
         BOOL result = [self.db executeUpdate:@"INSERT INTO projects(name) VALUES(?);", dateString];
         Project *project = [Project new];
         if (result) {
-            project = [[Project alloc] init:(NSInteger)self.db.lastInsertRowId :dateString];
+            project = [[Project alloc] init:(NSInteger)self.db.lastInsertRowId name:dateString];
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             completion(project);
@@ -131,16 +203,6 @@
          dateString, @(projectId), @(curveId), @"AddRect"];
     });
 }
-
-//- (void)lastInserRowId {
-//    dispatch_async(self.workQueue, ^{
-//        NSInteger lastId = (NSInteger)self.db.lastInsertRowId;
-//
-//        dispatch_async(dispatch_get_main_queue(), ^{
-////            completion(results);
-//        });
-//    });
-//}
 
 #pragma mark - Private
 

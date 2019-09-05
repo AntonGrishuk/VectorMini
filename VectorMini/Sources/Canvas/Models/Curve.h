@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Curve : BaseCurve
 
+- (instancetype)init:(NSArray *)points hexColor:(NSUInteger)hexColor;
+
 @end
 
 NS_ASSUME_NONNULL_END

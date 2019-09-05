@@ -13,7 +13,6 @@
     NSUInteger _hexColor;
 }
 
-@property (nonatomic, assign) CGPoint startPoint;
 @property (nonatomic, assign) CGPoint anchorPoint;
 @property (nonatomic, assign) CGPoint finishPoint;
 @property (nonatomic, assign, readwrite) NSUInteger hexColor;
@@ -26,10 +25,19 @@
 {
     self = [super init];
     if (self) {
-        _startPoint = CGPointMake(CGFLOAT_MAX, CGFLOAT_MAX);
         _finishPoint = CGPointMake(CGFLOAT_MAX, CGFLOAT_MAX);
         _anchorPoint = CGPointMake(CGFLOAT_MAX, CGFLOAT_MAX);
         _hexColor = arc4random() % 0xFFFFFF;
+    }
+    return self;
+}
+
+- (instancetype)init:(CGRect)rect hexColor:(NSUInteger)hexColor {
+    self = [self init];
+    if (self) {
+        _anchorPoint = rect.origin;
+        _finishPoint = CGPointMake(CGRectGetMaxX(rect), CGRectGetMaxY(rect));
+        _hexColor = hexColor;
     }
     return self;
 }
@@ -45,8 +53,7 @@
 #pragma mark - Public
 
 - (void)addPoint:(CGPoint)point {
-    if (self.startPoint.x == CGFLOAT_MAX) {
-        self.startPoint = point;
+    if (self.anchorPoint.x == CGFLOAT_MAX) {
         self.anchorPoint = point;
     }
     
@@ -61,6 +68,7 @@
 - (void)addLastPoint:(CGPoint)point {
     self.finishPoint = point;
     CGRect rect = [self constructRect];
+
     CGPathRef path = CGPathCreateWithRect(rect, nil);
     [self.delegate curvePathDidFinished:path];
     CGPathRelease(path);
@@ -84,7 +92,6 @@
             CGPoint point = [(NSValue *)obj CGPointValue];
             
             if (idx == 0) {
-                self.startPoint = point;
                 self.anchorPoint = point;
             } else {
                 self.finishPoint = point;
@@ -109,15 +116,15 @@
 #pragma mark - Private
 
 - (CGRect)constructRect {
-    self.startPoint = CGPointMake(MIN(self.anchorPoint.x, self.finishPoint.x),
+    CGPoint startPoint = CGPointMake(MIN(self.anchorPoint.x, self.finishPoint.x),
                                   MIN(self.anchorPoint.y, self.finishPoint.y));
     
-    self.finishPoint = CGPointMake(MAX(self.anchorPoint.x, self.finishPoint.x),
+    CGPoint finishPoint = CGPointMake(MAX(self.anchorPoint.x, self.finishPoint.x),
                                    MAX(self.anchorPoint.y, self.finishPoint.y));
     
-    return CGRectMake(self.startPoint.x, self.startPoint.y,
-                      self.finishPoint.x - self.startPoint.x,
-                      self.finishPoint.y - self.startPoint.y);
+    return CGRectMake(startPoint.x, startPoint.y,
+                      finishPoint.x - startPoint.x,
+                      finishPoint.y - startPoint.y);
     
 }
 

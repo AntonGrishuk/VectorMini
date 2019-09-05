@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, readonly) NSInteger idNumber;
 @property (nonatomic, strong, readonly) NSString *name;
 
-- (instancetype)init:(NSInteger)idNumber :(NSString *)name;
+- (instancetype)init:(NSInteger)idNumber name:(NSString *)name;
 
 @end
 

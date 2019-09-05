@@ -25,6 +25,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addRectangle:(Rectangle *)rectangle forProject:(NSInteger)projectId
           completion:(void(^)(NSInteger curveId, BOOL result))completion;
 
+- (void)fetchCurves:(NSInteger)projectId completion:(void(^)(NSArray *))completion;
+- (void)fetchRectangles:(NSInteger)projectId completion:(void(^)(NSArray *))completion;
+
 @end
 
 NS_ASSUME_NONNULL_END
