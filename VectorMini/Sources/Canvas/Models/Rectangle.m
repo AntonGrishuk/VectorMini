@@ -7,15 +7,16 @@
 //
 
 #import "Rectangle.h"
-#import <UIKit/UIGeometry.h>
+#import <UIColor+Hex.h>
 
-
-@interface Rectangle ()
+@interface Rectangle () {
+    NSUInteger _hexColor;
+}
 
 @property (nonatomic, assign) CGPoint startPoint;
 @property (nonatomic, assign) CGPoint anchorPoint;
 @property (nonatomic, assign) CGPoint finishPoint;
-
+@property (nonatomic, assign, readwrite) NSUInteger hexColor;
 
 @end
 
@@ -28,8 +29,17 @@
         _startPoint = CGPointMake(CGFLOAT_MAX, CGFLOAT_MAX);
         _finishPoint = CGPointMake(CGFLOAT_MAX, CGFLOAT_MAX);
         _anchorPoint = CGPointMake(CGFLOAT_MAX, CGFLOAT_MAX);
+        _hexColor = arc4random() % 0xFFFFFF;
     }
     return self;
+}
+
+- (void)setHexColor:(NSUInteger)hexColor {
+    _hexColor = hexColor;
+}
+
+- (NSUInteger)hexColor {
+    return _hexColor;
 }
 
 #pragma mark - Public
@@ -88,6 +98,9 @@
     
 }
 
+- (UIColor *)color {
+    return [UIColor colorWithHex: self.hexColor];
+}
 
 #pragma mark - Private
 

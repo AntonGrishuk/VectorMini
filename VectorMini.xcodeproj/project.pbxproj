@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06A24ECE23215642007CEA6B /* BaseCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A24ECD23215642007CEA6B /* BaseCurve.m */; };
 		951D1955231F1A5900AF62C0 /* DBController.m in Sources */ = {isa = PBXBuildFile; fileRef = 951D1953231F1A5900AF62C0 /* DBController.m */; };
 		951D1968231F1BD000AF62C0 /* Curve.m in Sources */ = {isa = PBXBuildFile; fileRef = 951D1958231F1BD000AF62C0 /* Curve.m */; };
 		951D1969231F1BD000AF62C0 /* Rectangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 951D195A231F1BD000AF62C0 /* Rectangle.m */; };
 		951D196A231F1BD000AF62C0 /* CanvasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 951D195E231F1BD000AF62C0 /* CanvasViewController.m */; };
-		951D196B231F1BD000AF62C0 /* CanvasModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 951D195F231F1BD000AF62C0 /* CanvasModelController.m */; };
 		951D196C231F1BD000AF62C0 /* CanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = 951D1963231F1BD000AF62C0 /* CanvasView.m */; };
 		951D196D231F1BD000AF62C0 /* CAShapeLayer+Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 951D1967231F1BD000AF62C0 /* CAShapeLayer+Image.m */; };
 		959AC965231AC59700BE6C9D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 959AC964231AC59700BE6C9D /* AppDelegate.m */; };
@@ -27,19 +27,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		06A24ECC23215642007CEA6B /* BaseCurve.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseCurve.h; sourceTree = "<group>"; };
+		06A24ECD23215642007CEA6B /* BaseCurve.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseCurve.m; sourceTree = "<group>"; };
 		49D5D0DC7B6907E19D253D87 /* Pods-VectorMini.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VectorMini.debug.xcconfig"; path = "Target Support Files/Pods-VectorMini/Pods-VectorMini.debug.xcconfig"; sourceTree = "<group>"; };
 		81A812DCB60D6BF28507FF91 /* Pods_VectorMini.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VectorMini.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		951D1953231F1A5900AF62C0 /* DBController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBController.m; sourceTree = "<group>"; };
 		951D1954231F1A5900AF62C0 /* DBController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBController.h; sourceTree = "<group>"; };
 		951D1958231F1BD000AF62C0 /* Curve.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Curve.m; sourceTree = "<group>"; };
-		951D1959231F1BD000AF62C0 /* CurveProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurveProtocols.h; sourceTree = "<group>"; };
 		951D195A231F1BD000AF62C0 /* Rectangle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rectangle.m; sourceTree = "<group>"; };
 		951D195B231F1BD000AF62C0 /* Curve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Curve.h; sourceTree = "<group>"; };
 		951D195C231F1BD000AF62C0 /* Rectangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rectangle.h; sourceTree = "<group>"; };
 		951D195E231F1BD000AF62C0 /* CanvasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CanvasViewController.m; sourceTree = "<group>"; };
-		951D195F231F1BD000AF62C0 /* CanvasModelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CanvasModelController.m; sourceTree = "<group>"; };
 		951D1960231F1BD000AF62C0 /* CanvasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CanvasViewController.h; sourceTree = "<group>"; };
-		951D1961231F1BD000AF62C0 /* CanvasModelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CanvasModelController.h; sourceTree = "<group>"; };
 		951D1963231F1BD000AF62C0 /* CanvasView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CanvasView.m; sourceTree = "<group>"; };
 		951D1964231F1BD000AF62C0 /* CanvasView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CanvasView.h; sourceTree = "<group>"; };
 		951D1966231F1BD000AF62C0 /* CAShapeLayer+Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAShapeLayer+Image.h"; sourceTree = "<group>"; };
@@ -105,11 +104,12 @@
 		951D1957231F1BD000AF62C0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				951D1958231F1BD000AF62C0 /* Curve.m */,
-				951D1959231F1BD000AF62C0 /* CurveProtocols.h */,
-				951D195A231F1BD000AF62C0 /* Rectangle.m */,
+				06A24ECC23215642007CEA6B /* BaseCurve.h */,
+				06A24ECD23215642007CEA6B /* BaseCurve.m */,
 				951D195B231F1BD000AF62C0 /* Curve.h */,
+				951D1958231F1BD000AF62C0 /* Curve.m */,
 				951D195C231F1BD000AF62C0 /* Rectangle.h */,
+				951D195A231F1BD000AF62C0 /* Rectangle.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -117,10 +117,8 @@
 		951D195D231F1BD000AF62C0 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				951D195E231F1BD000AF62C0 /* CanvasViewController.m */,
-				951D195F231F1BD000AF62C0 /* CanvasModelController.m */,
 				951D1960231F1BD000AF62C0 /* CanvasViewController.h */,
-				951D1961231F1BD000AF62C0 /* CanvasModelController.h */,
+				951D195E231F1BD000AF62C0 /* CanvasViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -357,11 +355,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06A24ECE23215642007CEA6B /* BaseCurve.m in Sources */,
 				95D098CE23204ED4004C7842 /* ProjectsViewController.m in Sources */,
 				951D1968231F1BD000AF62C0 /* Curve.m in Sources */,
 				95D098DF23206578004C7842 /* CurvesListTableViewController.m in Sources */,
 				959AC973231AC59800BE6C9D /* main.m in Sources */,
-				951D196B231F1BD000AF62C0 /* CanvasModelController.m in Sources */,
 				95D098D723205CDC004C7842 /* Project.m in Sources */,
 				951D196A231F1BD000AF62C0 /* CanvasViewController.m in Sources */,
 				951D196C231F1BD000AF62C0 /* CanvasView.m in Sources */,

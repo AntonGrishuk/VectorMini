@@ -7,15 +7,17 @@
 //
 
 #import "Curve.h"
-#import <UIKit/UIGeometry.h>
+#import <UIColor+Hex.h>
 
 @interface Curve () {
     CGPoint smoothingPoints[5];
     NSUInteger smoothingPointsCounter;
+    NSUInteger _hexColor;
 }
 
 @property (nonatomic, assign) CGMutablePathRef path;
 @property (nonatomic, strong) NSMutableArray *points;
+@property (nonatomic, assign, readwrite) NSUInteger hexColor;
 
 @end
 
@@ -29,6 +31,7 @@
     if (self) {
         _path = CGPathCreateMutable();
         _points = [NSMutableArray array];
+        _hexColor = arc4random() % 0xFFFFFF;
     }
     return self;
 }
@@ -43,6 +46,14 @@
 
 - (void)dealloc {
     CGPathRelease(_path);
+}
+
+- (void)setHexColor:(NSUInteger)hexColor {
+    _hexColor = hexColor;
+}
+
+- (NSUInteger)hexColor {
+    return _hexColor;
 }
 
 #pragma mark - Public
@@ -97,6 +108,10 @@
     return  [NSArray arrayWithArray:self.points];
 }
 
+- (UIColor *)color {
+    return [UIColor colorWithHex:self.hexColor];
+}
+
 #pragma mark - Private
 
 - (CGPathRef)newPathWith:(CGPoint)point {
@@ -106,15 +121,16 @@
         
         CGPoint point = smoothingPoints[0];
         CGPathMoveToPoint(self.path, nil, point.x, point.y);
-        CGPathAddLineToPoint(self.path, nil, point.x, point.y);
+        CGMutablePathRef tmpPath = CGPathCreateMutableCopy(self.path);
+        CGPathAddLineToPoint(tmpPath, nil, point.x, point.y);
         smoothingPointsCounter++;
+        return tmpPath;
         
     } else if (smoothingPointsCounter == 1) {
         
         CGPoint point = smoothingPoints[smoothingPointsCounter];
         CGMutablePathRef tmpPath = CGPathCreateMutableCopy(self.path);
         CGPathAddLineToPoint(tmpPath, nil, point.x, point.y);
-        [self.delegate curvePathDidChange:tmpPath];
         smoothingPointsCounter++;
         return tmpPath;
         

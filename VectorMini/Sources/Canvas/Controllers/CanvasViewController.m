@@ -7,16 +7,18 @@
 //
 
 #import "CanvasViewController.h"
-#import "CanvasModelController.h"
 #import "CAShapeLayer+Image.h"
+#import "BaseCurve.h"
 
 #define LINE_WIDTH 5;
 
-@interface CanvasViewController ()<CanvasModelControllerDelegate>
+@interface CanvasViewController ()<CurveDelegate>
 
 @property (nonatomic, strong) CAShapeLayer *shapeLayer;
-@property (nonatomic, strong) CanvasModelController *modelController;
 @property (nonatomic, strong) UIImage *canvasImage;
+@property (nonatomic, strong) BaseCurve *currentCurve;
+@property (nonatomic, strong) NSMutableArray *curves;
+@property (nonatomic, assign) CurveType currentCurveType;
 
 @end
 
@@ -26,8 +28,9 @@
 {
     self = [super initWithCoder:coder];
     if (self) {
-        _modelController = [CanvasModelController new];
         _canvasImage = [[UIImage alloc] init];
+        _curves = [NSMutableArray array];
+        _currentCurveType = CurveTypeCurve;
     }
     return self;
 }
@@ -39,9 +42,6 @@
     
     self.shapeLayer = [[CAShapeLayer alloc] init];
     [self.view.layer addSublayer:self.shapeLayer];
-    
-    self.modelController.delegate = self;
-    [self.modelController setCurveType:CurveTypeCurve];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -49,18 +49,14 @@
     [self configureShapeLayer];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
 #pragma mark - Public
 
 - (void)selectCurveDrawTool {
-    [self.modelController setCurveType:CurveTypeCurve];
+    self.currentCurveType = CurveTypeCurve;
 }
 
 - (void)selectRectangleDrawTool {
-    [self.modelController setCurveType:CurveTypeRectangle];
+    self.currentCurveType = CurveTypeRectangle;
 }
 
 #pragma mark - Touches handling
@@ -68,19 +64,52 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self.view];
-    [self.modelController beginDrawingWith:point];
+    
+    switch (self.currentCurveType) {
+        case CurveTypeCurve:
+            self.currentCurve = [[Curve alloc] init];
+            break;
+            
+        case CurveTypeRectangle:
+            self.currentCurve = [[Rectangle alloc] init];
+            break;
+            
+        default:
+            break;
+    }
+    
+    [self.curves addObject:self.currentCurve];
+    self.currentCurve.delegate = self;
+    [self.currentCurve addPoint:point];
+    
+    self.shapeLayer.strokeColor = [[self.currentCurve color] CGColor];
 }
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self.view];
-    [self.modelController continueDrawingWith:point];
+    [self.currentCurve addPoint:point];
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self.view];
-    [self.modelController endDrawingWith:point];
+    [self.currentCurve addLastPoint:point];
+    
+    switch (self.currentCurveType) {
+            
+        case CurveTypeCurve:
+            
+            [self.delegate didFinishDrawCurve: &_currentCurve];
+            break;
+            
+        case CurveTypeRectangle:
+            [self.delegate didFinishDrawRectangle: &_currentCurve];
+            break;
+            
+        default:
+            break;
+    }
 }
 
 #pragma mark - Private
@@ -95,29 +124,17 @@
     self.shapeLayer.lineCap = kCALineCapRound;
 }
 
-#pragma mark - CanvasModelControllerDelegate
+#pragma mark - CurveDelegate
 
-- (void)canvasModelDidChangePath:(CGPathRef)path {
-    CABasicAnimation * anim = [CABasicAnimation animationWithKeyPath:@"path"];
-    [anim setDuration:0.2];
-    anim.fromValue = (__bridge id)self.shapeLayer.path;
-    anim.toValue =(__bridge id)path;
-    [self.shapeLayer addAnimation:anim forKey:nil];
+- (void)curvePathDidChange:(CGPathRef)path {
     self.shapeLayer.path = path;
 }
 
-- (void)canvasModelDidEndPath:(CGPathRef)path {
+- (void)curvePathDidFinished:(nonnull CGPathRef)path {
     self.shapeLayer.path = path;
     self.canvasImage = [self.shapeLayer imageWithBackground:self.canvasImage];
     self.shapeLayer.path = nil;
     self.view.layer.contents = (__bridge id _Nullable)(self.canvasImage.CGImage);
-}
-- (IBAction)onSwith:(UISwitch *)sender {
-    CurveType curveType = CurveTypeCurve;
-    if (sender.isOn) {
-        curveType = CurveTypeRectangle;
-    }
-    [self.modelController setCurveType:curveType];
 }
 
 @end

@@ -7,14 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreGraphics/CoreGraphics.h>
-#import "CurveProtocols.h"
+#import "BaseCurve.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Rectangle : NSObject<CurveInterface>
-
-@property (nonatomic, weak) id<CurveDelegate> delegate;
+@interface Rectangle : BaseCurve
 
 @end
 

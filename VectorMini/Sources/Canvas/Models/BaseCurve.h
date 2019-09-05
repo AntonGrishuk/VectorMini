@@ -1,13 +1,15 @@
 //
-//  CurveProtocols.h
-//  Canvas
+//  BaseCurve.h
+//  VectorMini
 //
-//  Created by Anton Grishuk on 9/2/19.
+//  Created by Grishuk Anton on 9/5/19.
 //  Copyright © 2019 Anton Grishuk. All rights reserved.
 //
 
-#ifndef CurveProtocols_h
-#define CurveProtocols_h
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @protocol CurveDelegate <NSObject>
 
@@ -16,17 +18,20 @@
 
 @end
 
-@protocol CurveInterface <NSObject>
+@interface BaseCurve : NSObject
 
 @property (nonatomic, weak) id<CurveDelegate> delegate;
+@property (nonatomic, assign, readonly) NSUInteger hexColor;
 
 - (void)addPoint:(CGPoint)point;
 - (void)addLastPoint:(CGPoint)point;
 - (void)constructPathFromPoints:(NSArray *)points;
 - (CGPathRef)newPath;
 - (NSArray *)getPoints;
+- (UIColor *)color;
+- (void)setupId:(NSInteger)iD;
+- (NSInteger)getId;
 
 @end
 
-
-#endif /* CurveProtocols_h */
+NS_ASSUME_NONNULL_END

@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Project.h"
+#import "Curve.h"
+#import "Rectangle.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,7 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)start;
 - (void)fetchProjects:(void(^)(NSArray *))completion;
-- (void)addProject:(void(^)(NSString *))completion;
+- (void)addProject:(void(^)(Project * _Nullable))completion;
+//- (void)lastInserRowId;
+- (void)addCurve:(Curve *)curve forProject:(NSUInteger)projectId completion:(void(^)(NSInteger curveId, BOOL result))completion;
 
 @end
 

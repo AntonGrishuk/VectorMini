@@ -10,8 +10,9 @@
 #import "CanvasViewController.h"
 #import "CurvesListTableViewController.h"
 
-@interface CanvasContainerViewController ()
+@interface CanvasContainerViewController ()<CanvasViewControllerDelegate>
 @property (nonatomic, strong) Project *project;
+@property (nonatomic, strong) DBController *dbController;
 @end
 
 @implementation CanvasContainerViewController
@@ -21,8 +22,18 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[self canvasViewController] setDelegate:self];
+    
+}
+
 - (void)setSelectedProject:(Project *)project {
     self.project = project;
+}
+
+- (void)setupDataBaseController:(DBController *)dbController {
+    self.dbController = dbController;
 }
 
 /*
@@ -76,6 +87,18 @@
         default:
             break;
     }
+}
+
+#pragma mark - CanvasViewControllerDelegate
+
+- (void)didFinishDrawCurve:(Curve *__strong*)curve {
+    Curve *tmpCurve = *curve;
+    [self.dbController addCurve:tmpCurve forProject:[self.project idNumber] completion:^(NSInteger curveId, BOOL result) {
+        [(*curve) setupId:curveId];
+    }];
+}
+
+- (void)didFinishDrawRectangle:(Rectangle **)rectangle {
 }
 
 

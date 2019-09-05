@@ -47,14 +47,18 @@
         id canvasContainer = [segue destinationViewController];
         if ([canvasContainer isKindOfClass:[CanvasContainerViewController class]]) {
             [(CanvasContainerViewController *)canvasContainer setSelectedProject: project];
+             [(CanvasContainerViewController *)canvasContainer setupDataBaseController:self.dbController];
         }
     }
 }
 
 - (IBAction)onAddProject:(UIBarButtonItem *)sender {
     __weak ProjectsViewController *weakSelf = self;
-    [self.dbController addProject:^(NSString * _Nonnull projectName) {
-        [weakSelf fetchProjects];
+    [self.dbController addProject:^(Project * _Nullable project) {
+        if (project) {
+            [weakSelf.projects addObject:project];
+            [weakSelf.tabelView reloadData];
+        }
     }];
 }
 

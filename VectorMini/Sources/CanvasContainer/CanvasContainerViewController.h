@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "Project.h"
+#import "DBController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CanvasContainerViewController : UIViewController
 
 - (void)setSelectedProject:(Project *)project;
+- (void)setupDataBaseController:(DBController *)dbController;
 
 @end
 

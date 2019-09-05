@@ -8,7 +8,6 @@
 
 #import "DBController.h"
 #import <FMDB/FMDB.h>
-#import "Project.h"
 
 @interface DBController()
 
@@ -69,21 +68,66 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             completion(results);
         });
+    });
+}
+
+- (void)addProject:(void(^)(Project *))completion {
+    dispatch_async(self.workQueue, ^{
+        NSString *dateString = [self dateString];
+        BOOL result = [self.db executeUpdate:@"INSERT INTO projects(name) VALUES(?);", dateString];
+        Project *project = [Project new];
+        if (result) {
+            project = [[Project alloc] init:(NSInteger)self.db.lastInsertRowId :dateString];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(project);
+        });
+    });
+}
+
+- (void)addCurve:(Curve *)curve forProject:(NSUInteger)projectId completion:(void(^)(NSInteger curveId, BOOL result))completion  {
+    dispatch_async(self.workQueue, ^{
+        NSString *dateString = [self dateString];
+        BOOL result = [self.db executeUpdate:@"INSERT INTO lines(projectId, color, visible, date) VALUES(?, ?, ?, ?);",
+                       projectId, [curve hexColor], 1, dateString];
+        
+        NSInteger curveId = (NSInteger)self.db.lastInsertRowId;
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(curveId, result);
+            [self addPoints:curve];
+            [self addToChangesHistory];
+        });
+        
+        NSArray *points = [curve getPoints];
+        for (NSValue *pointValue in points) {
+            CGPoint p = [pointValue CGPointValue];
+            [self.db executeUpdate:@"INSERT INTO linesPoints(lineId, x, y) VALUES(?,?);", curveId, p.x, p.y];
+        }
+
+        [self.db executeUpdate:@"INSERT INTO history(date, projectId, toolId, action) VALUES(?,?,?,?);",
+         dateString, projectId, curveId, @"AddLine"];
         
     });
 }
 
-- (void)addProject:(void(^)(NSString *))completion {
-    dispatch_async(self.workQueue, ^{
-        NSDateFormatter * formatter =  [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"yyyy-MMM-dd HH:mm:ss:SSS"];
-        NSString *dateString = [formatter stringFromDate:[NSDate date]];
-        [self.db executeUpdate:@"INSERT INTO projects(name) VALUES(?);", dateString];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            completion(dateString);
-        });
-    });
+- (void)addPoints:(Curve *)curve {
+    
 }
+
+- (void)addToChangesHistory {
+    
+}
+
+//- (void)lastInserRowId {
+//    dispatch_async(self.workQueue, ^{
+//        NSInteger lastId = (NSInteger)self.db.lastInsertRowId;
+//
+//        dispatch_async(dispatch_get_main_queue(), ^{
+////            completion(results);
+//        });
+//    });
+//}
 
 #pragma mark - Private
 
@@ -109,24 +153,30 @@
     "CREATE TABLE projects(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL);"
     
     "CREATE TABLE lines(id INTEGER PRIMARY KEY AUTOINCREMENT,"
-    "projectId INTEGER, color TEXT NOT NULL, visible INTEGER, date TEXT NOT NULL,"
+    "projectId INTEGER, color INTEGER NOT NULL, visible INTEGER, date REAL NOT NULL,"
     "FOREIGN KEY(projectId) REFERENCES projects(id) ON DELETE CASCADE);"
     
     "CREATE TABLE rectangles(id INTEGER PRIMARY KEY AUTOINCREMENT,"
     "x REAL NOT NULL, y REAL NOT NULL, width REAL NOT NULL, height REAL NOT NULL,"
-    "projectId INTEGER, color TEXT NOT NULL, visible INTEGER, date TEXT NOT NULL,"
+    "projectId INTEGER, color INTEGER NOT NULL, visible INTEGER, date REAL NOT NULL,"
     "FOREIGN KEY(projectId) REFERENCES projects(id) ON DELETE CASCADE);"
     
     "CREATE TABLE linesPoints(id INTEGER PRIMARY KEY AUTOINCREMENT,"
     "lineId INTEGER, x REAL NOT NULL, y REAL NOT NULL,"
     "FOREIGN KEY(lineId) REFERENCES lines(id) ON DELETE CASCADE);"
     
-    "CREATE TABLE history(id INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT NOT NULL,"
-    "projectId INTEGER, toolType INTEGER NOT NULL, toolId INTEGER NOT NULL, action INTEGER NOT NULL,"
+    "CREATE TABLE history(id INTEGER PRIMARY KEY AUTOINCREMENT, date REAL NOT NULL,"
+    "projectId INTEGER, toolId INTEGER NOT NULL, action TEXT NOT NULL,"
     "FOREIGN KEY(projectId) REFERENCES projects(id) ON DELETE CASCADE);"
     ;
     
     [self.db executeStatements:sql];
+}
+
+- (NSString *)dateString {
+    NSDateFormatter * formatter =  [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MMM-dd HH:mm:ss:SSS"];
+    return [formatter stringFromDate:[NSDate date]];
 }
 
 @end
