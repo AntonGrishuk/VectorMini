@@ -100,11 +100,11 @@
             
         case CurveTypeCurve:
             
-            [self.delegate didFinishDrawCurve: &_currentCurve];
+            [self.delegate didFinishDrawCurve: (Curve **)&_currentCurve];
             break;
             
         case CurveTypeRectangle:
-            [self.delegate didFinishDrawRectangle: &_currentCurve];
+            [self.delegate didFinishDrawRectangle: (Rectangle **)&_currentCurve];
             break;
             
         default:

@@ -19,7 +19,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)fetchProjects:(void(^)(NSArray *))completion;
 - (void)addProject:(void(^)(Project * _Nullable))completion;
 //- (void)lastInserRowId;
-- (void)addCurve:(Curve *)curve forProject:(NSUInteger)projectId completion:(void(^)(NSInteger curveId, BOOL result))completion;
+- (void)addCurve:(Curve *)curve forProject:(NSInteger)projectId
+      completion:(void(^)(NSInteger curveId, BOOL result))completion;
+
+- (void)addRectangle:(Rectangle *)rectangle forProject:(NSInteger)projectId
+          completion:(void(^)(NSInteger curveId, BOOL result))completion;
 
 @end
 

@@ -93,12 +93,22 @@
 
 - (void)didFinishDrawCurve:(Curve *__strong*)curve {
     Curve *tmpCurve = *curve;
-    [self.dbController addCurve:tmpCurve forProject:[self.project idNumber] completion:^(NSInteger curveId, BOOL result) {
-        [(*curve) setupId:curveId];
-    }];
+    [self.dbController addCurve:tmpCurve forProject:[self.project idNumber]
+                     completion:^(NSInteger curveId, BOOL result) {
+                         if (result) {
+                             [(*curve) setupId:curveId];
+                         }
+                     }];
 }
 
-- (void)didFinishDrawRectangle:(Rectangle **)rectangle {
+- (void)didFinishDrawRectangle:(Rectangle *__strong*)rectangle {
+    Rectangle *tmpRect = *rectangle;
+    [self.dbController addRectangle:tmpRect forProject:[self.project idNumber]
+                         completion:^(NSInteger curveId, BOOL result) {
+                             if (result) {
+                                 [(*rectangle) setupId:curveId];
+                             }
+                         }];
 }
 
 

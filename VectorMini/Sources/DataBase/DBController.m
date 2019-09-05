@@ -85,38 +85,51 @@
     });
 }
 
-- (void)addCurve:(Curve *)curve forProject:(NSUInteger)projectId completion:(void(^)(NSInteger curveId, BOOL result))completion  {
+- (void)addCurve:(Curve *)curve forProject:(NSInteger)projectId
+      completion:(void(^)(NSInteger curveId, BOOL result))completion
+{
     dispatch_async(self.workQueue, ^{
         NSString *dateString = [self dateString];
         BOOL result = [self.db executeUpdate:@"INSERT INTO lines(projectId, color, visible, date) VALUES(?, ?, ?, ?);",
-                       projectId, [curve hexColor], 1, dateString];
+                       @(projectId), @([curve hexColor]), @1, dateString];
         
         NSInteger curveId = (NSInteger)self.db.lastInsertRowId;
 
         dispatch_async(dispatch_get_main_queue(), ^{
             completion(curveId, result);
-            [self addPoints:curve];
-            [self addToChangesHistory];
         });
         
         NSArray *points = [curve getPoints];
         for (NSValue *pointValue in points) {
             CGPoint p = [pointValue CGPointValue];
-            [self.db executeUpdate:@"INSERT INTO linesPoints(lineId, x, y) VALUES(?,?);", curveId, p.x, p.y];
+            [self.db executeUpdate:@"INSERT INTO linesPoints(lineId, x, y) VALUES(?,?,?);", @(curveId), @(p.x), @(p.y)];
         }
 
         [self.db executeUpdate:@"INSERT INTO history(date, projectId, toolId, action) VALUES(?,?,?,?);",
-         dateString, projectId, curveId, @"AddLine"];
-        
+         dateString, @(projectId), @(curveId), @"AddLine"];
     });
 }
 
-- (void)addPoints:(Curve *)curve {
-    
-}
-
-- (void)addToChangesHistory {
-    
+- (void)addRectangle:(Rectangle *)rectangle forProject:(NSInteger)projectId
+          completion:(void(^)(NSInteger curveId, BOOL result))completion
+{
+    dispatch_async(self.workQueue, ^{
+        CGRect rect = [rectangle getRect];
+        NSString *dateString = [self dateString];
+        BOOL result = [self.db executeUpdate:@"INSERT INTO rectangles(projectId, color, visible, date, x, y, width,"
+                       "height) VALUES(?, ?, ?, ?, ?, ?, ?, ?);",
+                       @(projectId), @([rectangle hexColor]), @1, dateString, @(rect.origin.x), @(rect.origin.y),
+                       @(rect.size.width), @(rect.size.height)];
+        
+        NSInteger curveId = (NSInteger)self.db.lastInsertRowId;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(curveId, result);
+        });
+        
+        [self.db executeUpdate:@"INSERT INTO history(date, projectId, toolId, action) VALUES(?,?,?,?);",
+         dateString, @(projectId), @(curveId), @"AddRect"];
+    });
 }
 
 //- (void)lastInserRowId {

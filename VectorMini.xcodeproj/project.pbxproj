@@ -144,9 +144,9 @@
 		951D196E231F1BD900AF62C0 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				95D098DC23206526004C7842 /* CurvesList */,
 				951D1972231F1D5700AF62C0 /* Entry point */,
 				951D1965231F1BD000AF62C0 /* Categories */,
+				95D098DC23206526004C7842 /* CurvesList */,
 				951D1971231F1CD800AF62C0 /* DataBase */,
 				951D1970231F1C6800AF62C0 /* Projects */,
 				95D098D82320635D004C7842 /* CanvasContainer */,

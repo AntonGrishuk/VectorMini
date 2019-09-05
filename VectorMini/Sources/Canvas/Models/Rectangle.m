@@ -102,6 +102,10 @@
     return [UIColor colorWithHex: self.hexColor];
 }
 
+- (CGRect)getRect {
+    return [self constructRect];
+}
+
 #pragma mark - Private
 
 - (CGRect)constructRect {
