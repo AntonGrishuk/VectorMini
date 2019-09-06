@@ -11,7 +11,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol CurvesListTableViewControllerDelegate <NSObject>
+
+- (void)didRemoveCurveFromCurvesList:(BaseCurve *)curve;
+
+@end
+
+
 @interface CurvesListTableViewController : UITableViewController
+
+@property(weak, nonatomic) id<CurvesListTableViewControllerDelegate> delegate;
+
 - (void)addCurves:(NSArray *)curves;
 - (void)addCurve:(BaseCurve *)curve;
 @end

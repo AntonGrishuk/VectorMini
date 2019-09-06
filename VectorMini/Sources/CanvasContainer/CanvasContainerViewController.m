@@ -10,7 +10,7 @@
 #import "CanvasViewController.h"
 #import "CurvesListTableViewController.h"
 
-@interface CanvasContainerViewController ()<CanvasViewControllerDelegate>
+@interface CanvasContainerViewController ()<CanvasViewControllerDelegate, CurvesListTableViewControllerDelegate>
 @property (nonatomic, strong) Project *project;
 @property (nonatomic, strong) DBController *dbController;
 @end
@@ -25,6 +25,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[self canvasViewController] setDelegate:self];
+    [[self curvesListViewController] setDelegate:self];
     [self fetchCurves];
 }
 
@@ -56,8 +57,8 @@
     
     dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         [figures sortUsingComparator:^NSComparisonResult(BaseCurve *  _Nonnull obj1, BaseCurve *  _Nonnull obj2) {
-            CGFloat seconds1 = [obj1 getUnixDate];
-            CGFloat seconds2 = [obj2 getUnixDate];
+            NSTimeInterval seconds1 = [obj1 getSecondsSinceUnixEpoch];
+            NSTimeInterval seconds2 = [obj2 getSecondsSinceUnixEpoch];
             
             if (seconds1 < seconds2) {
                 return NSOrderedAscending;
@@ -74,16 +75,6 @@
         });
     });
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (UISplitViewController *)canvasSplitViewController {
      return (UISplitViewController *)[[self childViewControllers] firstObject];
@@ -132,23 +123,41 @@
 
 - (void)didFinishDrawCurve:(Curve *__strong*)curve {
     Curve *tmpCurve = *curve;
+    __weak CanvasContainerViewController *weakSelf = self;
+    
     [self.dbController addCurve:tmpCurve forProject:[self.project idNumber]
-                     completion:^(NSInteger curveId, BOOL result) {
-                         if (result) {
-                             [(*curve) setupId:curveId];
-                         }
-                     }];
+                     completion:^(NSInteger curveId, BOOL result)
+     {
+         if (result) {
+             [(*curve) setupId:curveId];
+             
+             CurvesListTableViewController *curvesListVC = [weakSelf curvesListViewController];
+             [curvesListVC addCurve:(*curve)];
+         }
+     }];
 }
 
 - (void)didFinishDrawRectangle:(Rectangle *__strong*)rectangle {
     Rectangle *tmpRect = *rectangle;
+    __weak CanvasContainerViewController *weakSelf = self;
+    
     [self.dbController addRectangle:tmpRect forProject:[self.project idNumber]
-                         completion:^(NSInteger curveId, BOOL result) {
-                             if (result) {
-                                 [(*rectangle) setupId:curveId];
-                             }
-                         }];
+                         completion:^(NSInteger curveId, BOOL result)
+     {
+         if (result) {
+             [(*rectangle) setupId:curveId];
+             
+             CurvesListTableViewController *curvesListVC = [weakSelf curvesListViewController];
+             [curvesListVC addCurve:(*rectangle)];
+         }
+     }];
 }
 
+#pragma mark - CurvesListTableViewControllerDelegate
+
+- (void)didRemoveCurveFromCurvesList:(BaseCurve *)curve {
+    [self.dbController removeCurve:curve projectId: [self.project idNumber]];
+    [[self canvasViewController] removeCurve:curve];
+}
 
 @end

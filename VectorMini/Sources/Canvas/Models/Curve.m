@@ -10,14 +10,13 @@
 #import <UIColor+Hex.h>
 
 @interface Curve () {
-    CGPoint smoothingPoints[5];
-    NSUInteger smoothingPointsCounter;
     NSUInteger _hexColor;
 }
 
 @property (nonatomic, assign) CGMutablePathRef path;
 @property (nonatomic, strong) NSMutableArray *points;
 @property (nonatomic, assign, readwrite) NSUInteger hexColor;
+@property (nonatomic, assign) BOOL begunDraw;
 
 @end
 
@@ -75,9 +74,15 @@
 }
 
 - (void)constructPathFromPoints:(NSArray *)points {
+    self.begunDraw = NO;
+    CGPathRelease(_path);
+    self.path = CGPathCreateMutable();
     NSInteger count = points.count;
     CGMutablePathRef mutPath = CGPathCreateMutable();
     self.points = [NSMutableArray arrayWithArray:points];
+    
+    CGPoint firstPoint = [(NSValue *)points.firstObject CGPointValue];
+    CGPathMoveToPoint(mutPath, nil, firstPoint.x, firstPoint.y);
     
     [points enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj isKindOfClass:NSValue.class]) {
@@ -117,55 +122,13 @@
 #pragma mark - Private
 
 - (CGPathRef)newPathWith:(CGPoint)point {
-    smoothingPoints[smoothingPointsCounter] = point;
     
-    if (smoothingPointsCounter == 0) {
-        
-        CGPoint point = smoothingPoints[0];
+    if (self.begunDraw == NO) {
         CGPathMoveToPoint(self.path, nil, point.x, point.y);
-        CGMutablePathRef tmpPath = CGPathCreateMutableCopy(self.path);
-        CGPathAddLineToPoint(tmpPath, nil, point.x, point.y);
-        smoothingPointsCounter++;
-        return tmpPath;
-        
-    } else if (smoothingPointsCounter == 1) {
-        
-        CGPoint point = smoothingPoints[smoothingPointsCounter];
-        CGMutablePathRef tmpPath = CGPathCreateMutableCopy(self.path);
-        CGPathAddLineToPoint(tmpPath, nil, point.x, point.y);
-        smoothingPointsCounter++;
-        return tmpPath;
-        
-    } else if (smoothingPointsCounter == 2) {
-
-        CGMutablePathRef tmpPath = CGPathCreateMutableCopy(self.path);
-        CGPoint p2 = CGPointMake((smoothingPoints[0].x + smoothingPoints[2].x)/2.0, (smoothingPoints[0].y + smoothingPoints[2].y)/2.0);
-        CGPathAddQuadCurveToPoint(tmpPath, nil, smoothingPoints[1].x, smoothingPoints[1].y,
-                                  p2.x, p2.y);
-        smoothingPointsCounter++;
-        return tmpPath;
-        
-    } else if (smoothingPointsCounter == 3) {
-        
-        CGMutablePathRef tmpPath = CGPathCreateMutableCopy(self.path);
-        CGPoint p2 = CGPointMake((smoothingPoints[1].x + smoothingPoints[3].x)/2.0, (smoothingPoints[1].y + smoothingPoints[3].y)/2.0);
-        CGPathAddQuadCurveToPoint(tmpPath, nil, smoothingPoints[1].x, smoothingPoints[1].y,
-                                  p2.x, p2.y);
-
-        smoothingPointsCounter++;
-        return tmpPath;
-        
-    } else if (smoothingPointsCounter == 4) {
-        
-        smoothingPoints[3] = CGPointMake((smoothingPoints[2].x + smoothingPoints[4].x)/2.0, (smoothingPoints[2].y + smoothingPoints[4].y)/2.0);
-        CGPathMoveToPoint(self.path, nil, smoothingPoints[0].x, smoothingPoints[0].y);
-        
-        CGPathAddCurveToPoint(self.path, nil, smoothingPoints[1].x, smoothingPoints[1].y, smoothingPoints[2].x, smoothingPoints[2].y,
-                              smoothingPoints[3].x, smoothingPoints[3].y );
-        smoothingPoints[0] = smoothingPoints[3];
-        smoothingPoints[1] = smoothingPoints[4];
-        smoothingPointsCounter = 1;
+        self.begunDraw = YES;
     }
+    
+    CGPathAddLineToPoint(self.path, nil, point.x, point.y);
     
     return CGPathCreateCopy(self.path);
 }

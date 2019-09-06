@@ -129,8 +129,8 @@
 		951D1962231F1BD000AF62C0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				951D1963231F1BD000AF62C0 /* CanvasView.m */,
 				951D1964231F1BD000AF62C0 /* CanvasView.h */,
+				951D1963231F1BD000AF62C0 /* CanvasView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";

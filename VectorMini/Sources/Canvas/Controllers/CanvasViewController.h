@@ -31,6 +31,8 @@ typedef NS_ENUM(NSInteger, CurveType) {
 - (void)selectCurveDrawTool;
 - (void)selectRectangleDrawTool;
 - (void)addCurves:(NSArray *)curves;
+- (void)removeCurve:(BaseCurve *)curve;
+- (void)cleanCanvas;
 
 @end
 

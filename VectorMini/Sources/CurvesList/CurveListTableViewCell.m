@@ -35,7 +35,7 @@
 
 - (void)setupCurve:(BaseCurve *)curve {
     self.colorView.backgroundColor = [curve color];
-    self.dateLabel.text = [self.dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:[curve getUnixDate]]];
+    self.dateLabel.text = [self.dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:[curve getSecondsSinceUnixEpoch]]];
     
     if ([curve isKindOfClass:[Curve class]]) {
         self.nameLabel.text = @"Curve";

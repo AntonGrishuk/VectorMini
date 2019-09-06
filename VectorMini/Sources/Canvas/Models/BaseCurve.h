@@ -30,8 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSArray *)getPoints;
 - (UIColor *)color;
 - (void)setupId:(NSInteger)iD;
-- (void)setupUnixDate:(CGFloat)date;
-- (CGFloat)getUnixDate;
+- (void)setupUnixDate:(NSTimeInterval)date;
+- (NSTimeInterval)getSecondsSinceUnixEpoch;
 - (NSInteger)getId;
 
 @end

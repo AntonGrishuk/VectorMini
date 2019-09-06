@@ -36,8 +36,12 @@
     return self.unixDate;
 }
 
-- (void)setupUnixDate:(CGFloat)date {
+- (void)setupUnixDate:(NSTimeInterval)date {
     self.unixDate = date;
+}
+
+- (NSTimeInterval)getSecondsSinceUnixEpoch {
+    return self.unixDate;
 }
 
 @end

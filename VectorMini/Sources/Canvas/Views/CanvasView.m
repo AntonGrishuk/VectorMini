@@ -8,6 +8,11 @@
 
 #import "CanvasView.h"
 
+@interface CanvasView()
+@property (nonatomic, assign) CGPathRef drawingPath;
+@property (nonatomic, strong) UIColor *pathColor;
+@end
+
 @implementation CanvasView
 
 @end

@@ -160,10 +160,12 @@
 - (void)addCurve:(Curve *)curve forProject:(NSInteger)projectId
       completion:(void(^)(NSInteger curveId, BOOL result))completion
 {
+    
     dispatch_async(self.workQueue, ^{
-        NSString *dateString = [self dateString];
+        NSDate *date = [NSDate date];
+
         BOOL result = [self.db executeUpdate:@"INSERT INTO lines(projectId, color, visible, date) VALUES(?, ?, ?, ?);",
-                       @(projectId), @([curve hexColor]), @1, dateString];
+                       @(projectId), @([curve hexColor]), @1, date];
         
         NSInteger curveId = (NSInteger)self.db.lastInsertRowId;
 
@@ -178,7 +180,7 @@
         }
 
         [self.db executeUpdate:@"INSERT INTO history(date, projectId, toolId, action) VALUES(?,?,?,?);",
-         dateString, @(projectId), @(curveId), @"AddLine"];
+         date, @(projectId), @(curveId), @"AddLine"];
     });
 }
 
@@ -186,11 +188,12 @@
           completion:(void(^)(NSInteger curveId, BOOL result))completion
 {
     dispatch_async(self.workQueue, ^{
+        NSDate *date = [NSDate date];
+
         CGRect rect = [rectangle getRect];
-        NSString *dateString = [self dateString];
         BOOL result = [self.db executeUpdate:@"INSERT INTO rectangles(projectId, color, visible, date, x, y, width,"
                        "height) VALUES(?, ?, ?, ?, ?, ?, ?, ?);",
-                       @(projectId), @([rectangle hexColor]), @1, dateString, @(rect.origin.x), @(rect.origin.y),
+                       @(projectId), @([rectangle hexColor]), @1, date, @(rect.origin.x), @(rect.origin.y),
                        @(rect.size.width), @(rect.size.height)];
         
         NSInteger curveId = (NSInteger)self.db.lastInsertRowId;
@@ -200,9 +203,28 @@
         });
         
         [self.db executeUpdate:@"INSERT INTO history(date, projectId, toolId, action) VALUES(?,?,?,?);",
-         dateString, @(projectId), @(curveId), @"AddRect"];
+         date, @(projectId), @(curveId), @"AddRect"];
     });
 }
+
+- (void)removeCurve:(BaseCurve *)curve projectId:(NSInteger)projectId {
+    dispatch_async(self.workQueue, ^{
+        NSString *tableName = @"";
+        if ([curve isKindOfClass:[Curve class]]) {
+            tableName = @"lines";
+        } else if ([curve isKindOfClass:[Rectangle class]]) {
+            tableName = @"rectangles";
+        }
+        
+        NSString *request = [NSString stringWithFormat:@"UPDATE %@ SET visible = 0 WHERE id = ?", tableName];
+        [self.db executeUpdate:request, @([curve getId])];
+        
+        [self.db executeUpdate:@"INSERT INTO history(date, projectId, toolId, action) VALUES(?,?,?,?);",
+         [NSDate date], @(projectId), @([curve getId]), @"Remove"];
+    });
+}
+
+
 
 #pragma mark - Private
 

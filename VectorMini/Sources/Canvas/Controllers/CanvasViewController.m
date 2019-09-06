@@ -9,8 +9,9 @@
 #import "CanvasViewController.h"
 #import "CAShapeLayer+Image.h"
 #import "BaseCurve.h"
+#import "CanvasView.h"
 
-#define LINE_WIDTH 5;
+#define LINE_WIDTH 1;
 
 @interface CanvasViewController ()<CurveDelegate>
 
@@ -90,7 +91,6 @@
             break;
     }
     
-    [self.curves addObject:self.currentCurve];
     self.currentCurve.delegate = self;
     [self.currentCurve addPoint:point];
     
@@ -107,7 +107,9 @@
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self.view];
     [self.currentCurve addLastPoint:point];
-    
+    [self.curves addObject:self.currentCurve];
+    [self.currentCurve setupUnixDate:[[NSDate date] timeIntervalSince1970] ];
+
     switch (self.currentCurveType) {
             
         case CurveTypeCurve:
@@ -124,6 +126,11 @@
     }
 }
 
+- (void)removeCurve:(BaseCurve *)curve {
+        [self.curves removeObject:curve];
+        [self redraw];
+}
+
 #pragma mark - Private
 
 - (void)configureShapeLayer {
@@ -134,6 +141,27 @@
     self.shapeLayer.strokeColor = [UIColor blackColor].CGColor;
     self.shapeLayer.lineJoin = kCALineJoinRound;
     self.shapeLayer.lineCap = kCALineCapRound;
+}
+
+- (void)redraw {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [self cleanCanvas];
+        
+        [self.curves enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([obj isKindOfClass:[BaseCurve class]]) {
+                self.shapeLayer.strokeColor = [[(BaseCurve *)obj color] CGColor];
+                CGPathRef p = [(BaseCurve *)obj newPath];
+                [self curvePathDidFinished:p];
+            }
+        }];
+    });
+}
+
+- (void)cleanCanvas {
+    self.view.layer.contents = nil;
+    self.shapeLayer.path = nil;
+    self.canvasImage = [UIImage new];
 }
 
 #pragma mark - CurveDelegate
