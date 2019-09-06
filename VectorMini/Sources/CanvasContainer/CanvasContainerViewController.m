@@ -70,6 +70,7 @@
             CanvasViewController *canvasVC = [self canvasViewController];
             CurvesListTableViewController *curvesListVC = [self curvesListViewController];
             [canvasVC addCurves:figures];
+            [curvesListVC addCurves:figures];
         });
     });
 }

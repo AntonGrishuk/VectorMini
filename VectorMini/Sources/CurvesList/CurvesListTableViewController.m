@@ -7,12 +7,24 @@
 //
 
 #import "CurvesListTableViewController.h"
+#import "CurveListTableViewCell.h"
 
 @interface CurvesListTableViewController ()
+
+@property (nonatomic, strong) NSMutableArray *curves;
 
 @end
 
 @implementation CurvesListTableViewController
+
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        _curves = [NSMutableArray array];
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -24,47 +36,64 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+- (void)addCurves:(NSArray *)curves {
+    [self.curves addObjectsFromArray:curves];
+    [self.tableView reloadData];
+    
+}
+
+- (void)addCurve:(BaseCurve *)curve {
+    [self.curves addObject:curve];
+    [self.tableView reloadData];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    return [self.curves count];
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CurveCell" forIndexPath:indexPath];
     
-    // Configure the cell...
+    BaseCurve *curve = [self.curves objectAtIndex:indexPath.row];
+    [(CurveListTableViewCell *)cell setupCurve:curve];
     
     return cell;
 }
-*/
 
-/*
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 80;
+}
+
+
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
 
-/*
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return UITableViewCellEditingStyleDelete;
+}
+
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
+        [self.curves removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    }
 }
-*/
+
 
 /*
 // Override to support rearranging the table view.

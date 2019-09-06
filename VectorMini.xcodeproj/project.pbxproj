@@ -19,6 +19,7 @@
 		959AC96D231AC59800BE6C9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 959AC96C231AC59800BE6C9D /* Assets.xcassets */; };
 		959AC970231AC59800BE6C9D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 959AC96E231AC59800BE6C9D /* LaunchScreen.storyboard */; };
 		959AC973231AC59800BE6C9D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 959AC972231AC59800BE6C9D /* main.m */; };
+		95C0197B23222AAF009F058C /* CurveListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95C0197A23222AAF009F058C /* CurveListTableViewCell.m */; };
 		95D098CE23204ED4004C7842 /* ProjectsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D098CD23204ED4004C7842 /* ProjectsViewController.m */; };
 		95D098D723205CDC004C7842 /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D098D623205CDC004C7842 /* Project.m */; };
 		95D098DB232063CC004C7842 /* CanvasContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D098DA232063CC004C7842 /* CanvasContainerViewController.m */; };
@@ -51,6 +52,8 @@
 		959AC96F231AC59800BE6C9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		959AC971231AC59800BE6C9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		959AC972231AC59800BE6C9D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		95C0197923222AAF009F058C /* CurveListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurveListTableViewCell.h; sourceTree = "<group>"; };
+		95C0197A23222AAF009F058C /* CurveListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurveListTableViewCell.m; sourceTree = "<group>"; };
 		95D098CC23204ED4004C7842 /* ProjectsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProjectsViewController.h; sourceTree = "<group>"; };
 		95D098CD23204ED4004C7842 /* ProjectsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProjectsViewController.m; sourceTree = "<group>"; };
 		95D098D523205CDC004C7842 /* Project.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
@@ -237,6 +240,8 @@
 			children = (
 				95D098DD23206578004C7842 /* CurvesListTableViewController.h */,
 				95D098DE23206578004C7842 /* CurvesListTableViewController.m */,
+				95C0197923222AAF009F058C /* CurveListTableViewCell.h */,
+				95C0197A23222AAF009F058C /* CurveListTableViewCell.m */,
 			);
 			path = CurvesList;
 			sourceTree = "<group>";
@@ -358,6 +363,7 @@
 				06A24ECE23215642007CEA6B /* BaseCurve.m in Sources */,
 				95D098CE23204ED4004C7842 /* ProjectsViewController.m in Sources */,
 				951D1968231F1BD000AF62C0 /* Curve.m in Sources */,
+				95C0197B23222AAF009F058C /* CurveListTableViewCell.m in Sources */,
 				95D098DF23206578004C7842 /* CurvesListTableViewController.m in Sources */,
 				959AC973231AC59800BE6C9D /* main.m in Sources */,
 				95D098D723205CDC004C7842 /* Project.m in Sources */,
