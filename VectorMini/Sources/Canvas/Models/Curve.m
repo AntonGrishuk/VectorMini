@@ -102,6 +102,7 @@
 }
 
 - (CGPathRef)newPath {
+    [self constructPathFromPoints:self.points];
     return  CGPathCreateCopy(self.path);
 }
 

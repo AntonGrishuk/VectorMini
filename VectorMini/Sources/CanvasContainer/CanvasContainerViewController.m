@@ -25,16 +25,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[self canvasViewController] setDelegate:self];
-    
-    NSInteger projId = [self.project idNumber];
-    [self.dbController fetchCurves:projId completion:^(NSArray * _Nonnull curves) {
-        NSLog(@"%@", curves);
-    }];
-    
-    [self.dbController fetchRectangles:projId completion:^(NSArray * _Nonnull rects) {
-        NSLog(@"%@", rects);
-    }];
-    
+    [self fetchCurves];
 }
 
 - (void)setSelectedProject:(Project *)project {
@@ -43,6 +34,44 @@
 
 - (void)setupDataBaseController:(DBController *)dbController {
     self.dbController = dbController;
+}
+
+- (void)fetchCurves {
+    NSInteger projId = [self.project idNumber];
+    
+    dispatch_group_t group = dispatch_group_create();
+    NSMutableArray *figures = [NSMutableArray array];
+    
+    dispatch_group_enter(group);
+    [self.dbController fetchCurves:projId completion:^(NSArray * _Nonnull curves) {
+        [figures addObjectsFromArray:curves];
+        dispatch_group_leave(group);
+    }];
+    
+    dispatch_group_enter(group);
+    [self.dbController fetchRectangles:projId completion:^(NSArray * _Nonnull rects) {
+        [figures addObjectsFromArray:rects];
+        dispatch_group_leave(group);
+    }];
+    
+    dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        [figures sortUsingComparator:^NSComparisonResult(BaseCurve *  _Nonnull obj1, BaseCurve *  _Nonnull obj2) {
+            CGFloat seconds1 = [obj1 getUnixDate];
+            CGFloat seconds2 = [obj2 getUnixDate];
+            
+            if (seconds1 < seconds2) {
+                return NSOrderedAscending;
+            }
+            
+            return NSOrderedDescending;
+        }];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            CanvasViewController *canvasVC = [self canvasViewController];
+            CurvesListTableViewController *curvesListVC = [self curvesListViewController];
+            [canvasVC addCurves:figures];
+        });
+    });
 }
 
 /*

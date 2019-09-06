@@ -59,6 +59,18 @@
     self.currentCurveType = CurveTypeRectangle;
 }
 
+- (void)addCurves:(NSArray *)curves {
+    [curves enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[BaseCurve class]]) {
+            [self.curves addObject:obj];
+            self.shapeLayer.strokeColor = [[(BaseCurve *)obj color] CGColor];
+            CGPathRef p = [(BaseCurve *)obj newPath];
+            [self curvePathDidFinished:p];
+            
+        }
+    }];
+}
+
 #pragma mark - Touches handling
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
