@@ -108,6 +108,18 @@
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self.view];
+    [self finishDrawing:point];
+}
+
+- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    CGPoint point = [touch locationInView:self.view];
+    [self finishDrawing:point];
+}
+
+#pragma mark - Private
+
+- (void)finishDrawing:(CGPoint)point {
     [self.currentCurve addPoint:point];
     [self.curves addObject:self.currentCurve];
     
@@ -116,12 +128,10 @@
     } else if ([self.currentCurve isKindOfClass:[Rectangle class]]) {
         [self.delegate didFinishDrawRectangle: (Rectangle **)&_currentCurve];
     }
-
+    
     self.shapeLayer.path = nil;
     [self updateView:[self.currentCurve bezierPath]];
 }
-
-#pragma mark - Private
 
 - (void)configureShapeLayer {
     self.shapeLayer.frame = self.view.layer.bounds;
