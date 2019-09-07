@@ -150,7 +150,7 @@
         <scene sceneID="OXr-Tf-dHa">
             <objects>
                 <tableViewController clearsSelectionOnViewWillAppear="NO" id="ixd-qe-3Cv" customClass="CurvesListTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="0pS-Sq-TBv">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="0pS-Sq-TBv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="698"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -159,7 +159,7 @@
                                 <rect key="frame" x="0.0" y="28" width="320" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cP7-wj-nbS" id="Qkk-er-1MR">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4sV-5r-Ncm">
@@ -204,7 +204,7 @@
         <!--Split View Controller-->
         <scene sceneID="RaA-Ya-A0X">
             <objects>
-                <splitViewController id="OYk-Jo-sXj" sceneMemberID="viewController">
+                <splitViewController automaticallyAdjustsScrollViewInsets="NO" id="OYk-Jo-sXj" sceneMemberID="viewController">
                     <connections>
                         <segue destination="8nl-Dl-ukD" kind="relationship" relationship="detailViewController" id="c0H-gz-3nS"/>
                         <segue destination="ixd-qe-3Cv" kind="relationship" relationship="masterViewController" id="Dni-RA-fBC"/>
