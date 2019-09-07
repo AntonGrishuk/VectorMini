@@ -43,6 +43,7 @@
 - (void)clean {
     [self.drawingPaths removeAllObjects];
     [self.pathsColors removeAllObjects];
+    [self setNeedsDisplay];
 }
 
 @end

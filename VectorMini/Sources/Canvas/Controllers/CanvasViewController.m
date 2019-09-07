@@ -120,7 +120,7 @@
         default:
             break;
     }
-    
+    self.shapeLayer.path = nil;
     [self updateView:[self.currentCurve bezierPath]];
 }
 
@@ -153,6 +153,7 @@
 }
 
 - (void)cleanCanvas {
+    self.currentCurve = nil;
     self.shapeLayer.path = nil;
     [(CanvasView *)self.view clean];
 }
