@@ -164,7 +164,7 @@
 {
     
     dispatch_async(self.workQueue, ^{
-        NSDate *date = [NSDate date];
+        NSDate *date = [curve creationDate];
 
         BOOL result = [self.db executeUpdate:@"INSERT INTO lines(projectId, color, visible, date) VALUES(?, ?, ?, ?);",
                        @(projectId), @([[curve color] hex]), @1, date];
@@ -190,7 +190,7 @@
           completion:(void(^)(NSInteger curveId, BOOL result))completion
 {
     dispatch_async(self.workQueue, ^{
-        NSDate *date = [NSDate date];
+        NSDate *date = [rectangle creationDate];
 
         CGRect rect = [rectangle frame];
         BOOL result = [self.db executeUpdate:@"INSERT INTO rectangles(projectId, color, visible, date, x, y, width,"
@@ -274,7 +274,7 @@
 
 - (NSString *)dateString {
     NSDateFormatter * formatter =  [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MMM-dd HH:mm:ss:SSS"];
+    [formatter setDateFormat:@"yyyy-MMM-dd HH:mm:ss"];
     return [formatter stringFromDate:[NSDate date]];
 }
 

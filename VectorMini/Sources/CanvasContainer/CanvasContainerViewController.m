@@ -26,7 +26,12 @@
     [super viewWillAppear:animated];
     [[self canvasViewController] setDelegate:self];
     [[self curvesListViewController] setDelegate:self];
-    [self fetchCurves];
+    [self fetchCurves:^(NSArray<BaseCurve *> *figures) {
+        CanvasViewController *canvasVC = [self canvasViewController];
+        CurvesListTableViewController *curvesListVC = [self curvesListViewController];
+        [canvasVC setupCurves:figures];
+        [curvesListVC setupCurves:figures];
+    }];
 }
 
 - (void)setSelectedProject:(Project *)project {
@@ -37,11 +42,11 @@
     self.dbController = dbController;
 }
 
-- (void)fetchCurves {
+- (void)fetchCurves:(void(^)(NSArray<BaseCurve *>* figures))completion {
     NSInteger projId = [self.project iD];
     
     dispatch_group_t group = dispatch_group_create();
-    NSMutableArray *figures = [NSMutableArray array];
+    NSMutableArray <BaseCurve *>*figures = [NSMutableArray array];
     
     dispatch_group_enter(group);
     [self.dbController fetchCurves:projId completion:^(NSArray * _Nonnull curves) {
@@ -62,10 +67,7 @@
         }];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            CanvasViewController *canvasVC = [self canvasViewController];
-            CurvesListTableViewController *curvesListVC = [self curvesListViewController];
-            [canvasVC addCurves:figures];
-            [curvesListVC addCurves:figures];
+            completion(figures);
         });
     });
 }
@@ -151,7 +153,12 @@
 
 - (void)didRemoveCurveFromCurvesList:(BaseCurve *)curve {
     [self.dbController removeCurve:curve projectId: [self.project iD]];
-    [[self canvasViewController] removeCurve:curve];
+    [self fetchCurves:^(NSArray<BaseCurve *> *figures) {
+        CanvasViewController *canvasVC = [self canvasViewController];
+        CurvesListTableViewController *curvesListVC = [self curvesListViewController];
+        [canvasVC setupCurves:figures];
+        [curvesListVC setupCurves:figures];
+    }];
 }
 
 @end

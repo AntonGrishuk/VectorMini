@@ -36,6 +36,11 @@
     [self.tableView reloadData];
 }
 
+- (void)setupCurves:(NSArray <BaseCurve *>*)curves {
+    self.curves = [NSMutableArray arrayWithArray:curves];
+    [self.tableView reloadData];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

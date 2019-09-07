@@ -22,8 +22,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(weak, nonatomic) id<CurvesListTableViewControllerDelegate> delegate;
 
-- (void)addCurves:(NSArray *)curves;
+- (void)addCurves:(NSArray <BaseCurve *>*)curves;
 - (void)addCurve:(BaseCurve *)curve;
+- (void)setupCurves:(NSArray <BaseCurve *>*)curves;
+
 @end
 
 NS_ASSUME_NONNULL_END

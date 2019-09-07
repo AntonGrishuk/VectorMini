@@ -43,6 +43,7 @@
 
 - (UIBezierPath *)bezierPath {
     UIBezierPath *path =  [UIBezierPath interpolateCGPointsWithHermite:self.points closed:NO];
+//    UIBezierPath *path =  [UIBezierPath interpolateCGPointsWithCatmullRom:self.points closed:NO alpha:1];
     return path;
 }
 

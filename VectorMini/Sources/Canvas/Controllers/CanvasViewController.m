@@ -11,7 +11,7 @@
 #import "BaseCurve.h"
 #import "CanvasView.h"
 
-#define LINE_WIDTH 3;
+#define LINE_WIDTH 5;
 
 @interface CanvasViewController ()
 
@@ -68,6 +68,11 @@
     }];
 }
 
+- (void)setupCurves:(NSArray <BaseCurve *>*)curves {
+    self.curves = [NSMutableArray arrayWithArray:curves];
+    [self redraw];
+}
+
 #pragma mark - Touches handling
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -105,28 +110,15 @@
     CGPoint point = [touch locationInView:self.view];
     [self.currentCurve addPoint:point];
     [self.curves addObject:self.currentCurve];
-
-    switch (self.currentCurveType) {
-            
-        case CurveTypeCurve:
-            
-            [self.delegate didFinishDrawCurve: (Curve **)&_currentCurve];
-            break;
-            
-        case CurveTypeRectangle:
-            [self.delegate didFinishDrawRectangle: (Rectangle **)&_currentCurve];
-            break;
-            
-        default:
-            break;
+    
+    if ([self.currentCurve isKindOfClass:[Curve class]]) {
+        [self.delegate didFinishDrawCurve: (Curve **)&_currentCurve];
+    } else if ([self.currentCurve isKindOfClass:[Rectangle class]]) {
+        [self.delegate didFinishDrawRectangle: (Rectangle **)&_currentCurve];
     }
+
     self.shapeLayer.path = nil;
     [self updateView:[self.currentCurve bezierPath]];
-}
-
-- (void)removeCurve:(BaseCurve *)curve {
-        [self.curves removeObject:curve];
-        [self redraw];
 }
 
 #pragma mark - Private

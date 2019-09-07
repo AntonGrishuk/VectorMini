@@ -24,7 +24,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.dateFormatter =  [[NSDateFormatter alloc] init];
-    [self.dateFormatter setDateFormat:@"yyyy-MMM-dd HH:mm:ss:SSS"];
+    [self.dateFormatter setDateFormat:@"yyyy-MMM-dd HH:mm:ss"];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
