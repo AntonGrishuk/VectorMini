@@ -11,28 +11,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol CurveDelegate <NSObject>
-
-- (void)curvePathDidChange:(UIBezierPath *)path;
-- (void)curvePathDidFinished:(UIBezierPath *)path;
-
-@end
-
 @interface BaseCurve : NSObject
 
-@property (nonatomic, weak) id<CurveDelegate> delegate;
-@property (nonatomic, assign, readonly) NSUInteger hexColor;
+@property (nonatomic, strong, readonly) NSDate *creationDate;
+@property (nonatomic, assign, readonly) NSInteger iD;
+@property (nonatomic, strong, readonly) UIColor *color;
+
+- (instancetype)init:(UIColor *)color;
 
 - (void)addPoint:(CGPoint)point;
-- (void)addLastPoint:(CGPoint)point;
-- (void)constructPathFromPoints:(NSArray *)points;
 - (UIBezierPath *)bezierPath;
-- (NSArray *)getPoints;
-- (UIColor *)color;
 - (void)setupId:(NSInteger)iD;
-- (void)setupUnixDate:(NSTimeInterval)date;
-- (NSTimeInterval)getSecondsSinceUnixEpoch;
-- (NSInteger)getId;
+- (void)setupCreationDate:(NSDate *)date;
 
 @end
 

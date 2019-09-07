@@ -11,11 +11,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-
-
 @interface Curve : BaseCurve
 
-- (instancetype)init:(NSArray *)points hexColor:(NSUInteger)hexColor;
+@property (nonatomic, strong, readonly) NSMutableArray *points;
+
+- (instancetype)init:(NSArray *)points color:(UIColor *)color;
 
 @end
 

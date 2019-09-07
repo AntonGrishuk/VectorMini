@@ -11,9 +11,9 @@
 #import "BaseCurve.h"
 #import "CanvasView.h"
 
-#define LINE_WIDTH 5;
+#define LINE_WIDTH 3;
 
-@interface CanvasViewController ()<CurveDelegate>
+@interface CanvasViewController ()
 
 @property (nonatomic, strong) CAShapeLayer *shapeLayer;
 @property (nonatomic, strong) BaseCurve *currentCurve;
@@ -63,8 +63,7 @@
         if ([obj isKindOfClass:[BaseCurve class]]) {
             [self.curves addObject:obj];
             self.shapeLayer.strokeColor = [[(BaseCurve *)obj color] CGColor];
-            UIBezierPath *p = [(BaseCurve *)obj bezierPath];
-            [self curvePathDidFinished:p];
+            [self updateView:[(BaseCurve *)obj bezierPath]];
         }
     }];
 }
@@ -88,24 +87,24 @@
             break;
     }
     
-    self.currentCurve.delegate = self;
     [self.currentCurve addPoint:point];
     
     self.shapeLayer.strokeColor = [[self.currentCurve color] CGColor];
+    self.shapeLayer.path = [[self.currentCurve bezierPath] CGPath];
 }
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self.view];
     [self.currentCurve addPoint:point];
+    self.shapeLayer.path = [[self.currentCurve bezierPath] CGPath];
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self.view];
-    [self.currentCurve addLastPoint:point];
+    [self.currentCurve addPoint:point];
     [self.curves addObject:self.currentCurve];
-    [self.currentCurve setupUnixDate:[[NSDate date] timeIntervalSince1970] ];
 
     switch (self.currentCurveType) {
             
@@ -121,6 +120,8 @@
         default:
             break;
     }
+    
+    [self updateView:[self.currentCurve bezierPath]];
 }
 
 - (void)removeCurve:(BaseCurve *)curve {
@@ -146,8 +147,7 @@
     [self.curves enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj isKindOfClass:[BaseCurve class]]) {
             self.shapeLayer.strokeColor = [[(BaseCurve *)obj color] CGColor];
-            UIBezierPath *p = [(BaseCurve *)obj bezierPath];
-            [self curvePathDidFinished:p];
+            [self updateView:[(BaseCurve *)obj bezierPath]];
         }
     }];
 }
@@ -157,14 +157,7 @@
     [(CanvasView *)self.view clean];
 }
 
-#pragma mark - CurveDelegate
-
-- (void)curvePathDidChange:(UIBezierPath *)path {
-    self.shapeLayer.path = path.CGPath;
-}
-
-- (void)curvePathDidFinished:(nonnull UIBezierPath *)path {
-    UIBezierPath *bezierPath = path;
+- (void)updateView:(UIBezierPath *)bezierPath {
     bezierPath.lineWidth = LINE_WIDTH;
     bezierPath.lineJoinStyle = kCGLineJoinRound;
     bezierPath.lineCapStyle = kCGLineCapRound;

@@ -19,8 +19,8 @@ typedef NS_ENUM(NSInteger, CurveType) {
 
 @protocol CanvasViewControllerDelegate <NSObject>
 
-- (void)didFinishDrawCurve:(Curve *__strong*)curve;
-- (void)didFinishDrawRectangle:(Rectangle *__strong*)rectangle;
+- (void)didFinishDrawCurve:(Curve * _Nonnull __strong*_Nonnull)curve;
+- (void)didFinishDrawRectangle:(Rectangle * _Nonnull __strong*_Nonnull)rectangle;
 
 @end
 

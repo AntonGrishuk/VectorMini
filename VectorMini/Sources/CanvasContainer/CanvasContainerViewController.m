@@ -38,7 +38,7 @@
 }
 
 - (void)fetchCurves {
-    NSInteger projId = [self.project idNumber];
+    NSInteger projId = [self.project iD];
     
     dispatch_group_t group = dispatch_group_create();
     NSMutableArray *figures = [NSMutableArray array];
@@ -57,14 +57,8 @@
     
     dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         [figures sortUsingComparator:^NSComparisonResult(BaseCurve *  _Nonnull obj1, BaseCurve *  _Nonnull obj2) {
-            NSTimeInterval seconds1 = [obj1 getSecondsSinceUnixEpoch];
-            NSTimeInterval seconds2 = [obj2 getSecondsSinceUnixEpoch];
             
-            if (seconds1 < seconds2) {
-                return NSOrderedAscending;
-            }
-            
-            return NSOrderedDescending;
+            return [[obj1 creationDate] compare:[obj2 creationDate]];
         }];
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -125,7 +119,7 @@
     Curve *tmpCurve = *curve;
     __weak CanvasContainerViewController *weakSelf = self;
     
-    [self.dbController addCurve:tmpCurve forProject:[self.project idNumber]
+    [self.dbController addCurve:tmpCurve forProject:[self.project iD]
                      completion:^(NSInteger curveId, BOOL result)
      {
          if (result) {
@@ -141,7 +135,7 @@
     Rectangle *tmpRect = *rectangle;
     __weak CanvasContainerViewController *weakSelf = self;
     
-    [self.dbController addRectangle:tmpRect forProject:[self.project idNumber]
+    [self.dbController addRectangle:tmpRect forProject:[self.project iD]
                          completion:^(NSInteger curveId, BOOL result)
      {
          if (result) {
@@ -156,7 +150,7 @@
 #pragma mark - CurvesListTableViewControllerDelegate
 
 - (void)didRemoveCurveFromCurvesList:(BaseCurve *)curve {
-    [self.dbController removeCurve:curve projectId: [self.project idNumber]];
+    [self.dbController removeCurve:curve projectId: [self.project iD]];
     [[self canvasViewController] removeCurve:curve];
 }
 

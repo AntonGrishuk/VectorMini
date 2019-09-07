@@ -14,7 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tabelView;
 @property (nonatomic, strong) DBController *dbController;
-@property (nonatomic, strong) NSMutableArray *projects;
+@property (nonatomic, strong) NSMutableArray<Project *> *projects;
 @property (nonatomic, assign) NSInteger selectedRow;
 
 @end

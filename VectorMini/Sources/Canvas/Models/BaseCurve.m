@@ -7,41 +7,41 @@
 //
 
 #import "BaseCurve.h"
+#import <UIColor+Hex.h>
 
 @interface BaseCurve ()
 
-@property (nonatomic, assign) NSInteger iD;
-@property (nonatomic, assign) CGFloat unixDate;
+@property (nonatomic, assign, readwrite) NSInteger iD;
+@property (nonatomic, strong, readwrite) NSDate *creationDate;
+@property (nonatomic, strong, readwrite) UIColor *color;
 
 @end
 
 @implementation BaseCurve
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _creationDate = [NSDate date];
+        NSInteger hexColor = arc4random() % 0xFFFFFF;
+        _color = [UIColor colorWithHex:hexColor];
+
+    }
+    return self;
+}
+
+- (instancetype)init:(UIColor *)color {
+    self = [self init];
+    if (self) {
+        _color = color;
+    }
+
+    return self;
+}
+
 - (void)addPoint:(CGPoint)point{}
-- (void)addLastPoint:(CGPoint)point{}
-- (void)constructPathFromPoints:(NSArray *)points{}
-- (UIBezierPath *)bezierPath{return [UIBezierPath bezierPath];}
-- (NSArray *)getPoints{return nil;}
-- (UIColor *)color{return nil;}
-
-- (void)setupId:(NSInteger)iD {
-    self.iD = iD;
-}
-
-- (NSInteger)getId {
-    return self.iD;
-}
-
-- (CGFloat)getUnixDate {
-    return self.unixDate;
-}
-
-- (void)setupUnixDate:(NSTimeInterval)date {
-    self.unixDate = date;
-}
-
-- (NSTimeInterval)getSecondsSinceUnixEpoch {
-    return self.unixDate;
-}
+- (UIBezierPath *)bezierPath{  return [UIBezierPath bezierPath]; }
+- (void)setupId:(NSInteger)iD { self.iD = iD; }
+- (void)setupCreationDate:(NSDate *)date { self.creationDate = date;}
 
 @end

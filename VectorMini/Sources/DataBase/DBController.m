@@ -8,6 +8,7 @@
 
 #import "DBController.h"
 #import <FMDB/FMDB.h>
+#import <UIColor+Hex.h>
 
 @interface DBController()
 
@@ -84,7 +85,7 @@
         while ([rs next]) {
             @autoreleasepool {
                 NSInteger lineId = [rs intForColumn:@"id"];
-                NSInteger color = [rs intForColumn:@"color"];
+                UIColor *color = [UIColor colorWithHex:[rs intForColumn:@"color"]];
                 double date = [rs doubleForColumn:@"date"];
                 
                 FMResultSet *pointsRs = [self.db executeQuery:
@@ -99,8 +100,8 @@
                     [points addObject:@(point)];
                 }
                 
-                Curve *c = [[Curve alloc] init:points hexColor:color];
-                [c setupUnixDate:date];
+                Curve *c = [[Curve alloc] init:points color:color];
+                [c setupCreationDate:[NSDate dateWithTimeIntervalSince1970:date]];
                 [c setupId:lineId];
                 
                 [results addObject:c];
@@ -122,15 +123,16 @@
         while ([rs next]) {
             @autoreleasepool {
                 NSInteger rectId = [rs intForColumn:@"id"];
-                NSInteger color = [rs intForColumn:@"color"];
+                UIColor *color = [UIColor colorWithHex:[rs intForColumn:@"color"]];
                 double date = [rs doubleForColumn:@"date"];
                 double x = [rs doubleForColumn:@"x"];
                 double y = [rs doubleForColumn:@"y"];
                 double width = [rs doubleForColumn:@"width"];
                 double height = [rs doubleForColumn:@"height"];
                 
-                Rectangle *r = [[Rectangle alloc] init:CGRectMake(x, y, width, height) hexColor:color];
-                [r setupUnixDate:date];
+                Rectangle *r = [[Rectangle alloc] init:CGRectMake(x, y, width, height) color:color];
+                
+                [r setupCreationDate:[NSDate dateWithTimeIntervalSince1970:date]];
                 [r setupId:rectId];
                 
                 [results addObject:r];
@@ -165,7 +167,7 @@
         NSDate *date = [NSDate date];
 
         BOOL result = [self.db executeUpdate:@"INSERT INTO lines(projectId, color, visible, date) VALUES(?, ?, ?, ?);",
-                       @(projectId), @([curve hexColor]), @1, date];
+                       @(projectId), @([[curve color] hex]), @1, date];
         
         NSInteger curveId = (NSInteger)self.db.lastInsertRowId;
 
@@ -173,7 +175,7 @@
             completion(curveId, result);
         });
         
-        NSArray *points = [curve getPoints];
+        NSArray *points = curve.points;
         for (NSValue *pointValue in points) {
             CGPoint p = [pointValue CGPointValue];
             [self.db executeUpdate:@"INSERT INTO linesPoints(lineId, x, y) VALUES(?,?,?);", @(curveId), @(p.x), @(p.y)];
@@ -190,10 +192,10 @@
     dispatch_async(self.workQueue, ^{
         NSDate *date = [NSDate date];
 
-        CGRect rect = [rectangle getRect];
+        CGRect rect = [rectangle frame];
         BOOL result = [self.db executeUpdate:@"INSERT INTO rectangles(projectId, color, visible, date, x, y, width,"
                        "height) VALUES(?, ?, ?, ?, ?, ?, ?, ?);",
-                       @(projectId), @([rectangle hexColor]), @1, date, @(rect.origin.x), @(rect.origin.y),
+                       @(projectId), @([[rectangle color] hex]), @1, date, @(rect.origin.x), @(rect.origin.y),
                        @(rect.size.width), @(rect.size.height)];
         
         NSInteger curveId = (NSInteger)self.db.lastInsertRowId;
@@ -217,10 +219,10 @@
         }
         
         NSString *request = [NSString stringWithFormat:@"UPDATE %@ SET visible = 0 WHERE id = ?", tableName];
-        [self.db executeUpdate:request, @([curve getId])];
+        [self.db executeUpdate:request, @(curve.iD)];
         
         [self.db executeUpdate:@"INSERT INTO history(date, projectId, toolId, action) VALUES(?,?,?,?);",
-         [NSDate date], @(projectId), @([curve getId]), @"Remove"];
+         [NSDate date], @(projectId), @(curve.iD), @"Remove"];
     });
 }
 

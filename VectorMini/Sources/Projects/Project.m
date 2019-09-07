@@ -9,17 +9,17 @@
 #import "Project.h"
 
 @interface Project ()
-@property (nonatomic, assign, readwrite) NSInteger idNumber;
+@property (nonatomic, assign, readwrite) NSInteger iD;
 @property (nonatomic, strong, readwrite) NSString *name;
 
 @end
 
 @implementation Project
 
-- (instancetype)init:(NSInteger)idNumber name:(NSString *)name {
+- (instancetype)init:(NSInteger)iD name:(NSString *)name {
     self = [super init];
     if (self) {
-        _idNumber = idNumber;
+        _iD = iD;
         _name = [name copy];
     }
     return self;

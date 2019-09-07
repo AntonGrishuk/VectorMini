@@ -12,10 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Project : NSObject
 
-@property (nonatomic, assign, readonly) NSInteger idNumber;
+@property (nonatomic, assign, readonly) NSInteger iD;
 @property (nonatomic, strong, readonly) NSString *name;
 
-- (instancetype)init:(NSInteger)idNumber name:(NSString *)name;
+- (instancetype)init:(NSInteger)iD name:(NSString *)name;
 
 @end
 

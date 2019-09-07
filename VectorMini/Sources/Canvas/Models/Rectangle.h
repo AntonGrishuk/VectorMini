@@ -13,8 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Rectangle : BaseCurve
 
-- (instancetype)init:(CGRect)rect hexColor:(NSUInteger)hexColor;
-- (CGRect)getRect;
+- (instancetype)init:(CGRect)rect color:(UIColor *)color;
+- (CGRect)frame;
 
 @end
 

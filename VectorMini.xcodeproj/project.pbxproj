@@ -184,6 +184,8 @@
 			children = (
 				95D098CC23204ED4004C7842 /* ProjectsViewController.h */,
 				95D098CD23204ED4004C7842 /* ProjectsViewController.m */,
+				95D098D523205CDC004C7842 /* Project.h */,
+				95D098D623205CDC004C7842 /* Project.m */,
 			);
 			path = Projects;
 			sourceTree = "<group>";
@@ -193,8 +195,6 @@
 			children = (
 				951D1954231F1A5900AF62C0 /* DBController.h */,
 				951D1953231F1A5900AF62C0 /* DBController.m */,
-				95D098D523205CDC004C7842 /* Project.h */,
-				95D098D623205CDC004C7842 /* Project.m */,
 			);
 			path = DataBase;
 			sourceTree = "<group>";
