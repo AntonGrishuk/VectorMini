@@ -67,7 +67,7 @@
             self.shapeLayer.strokeColor = [[(BaseCurve *)obj color] CGColor];
             CGPathRef p = [(BaseCurve *)obj newPath];
             [self curvePathDidFinished:p];
-            
+            CGPathRelease(p);
         }
     }];
 }
@@ -153,6 +153,7 @@
                 self.shapeLayer.strokeColor = [[(BaseCurve *)obj color] CGColor];
                 CGPathRef p = [(BaseCurve *)obj newPath];
                 [self curvePathDidFinished:p];
+                CGPathRelease(p);
             }
         }];
     });
