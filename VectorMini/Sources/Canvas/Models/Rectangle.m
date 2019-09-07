@@ -60,23 +60,21 @@
     self.finishPoint = point;
     
     CGRect rect = [self constructRect];
-    CGPathRef path = CGPathCreateWithRect(rect, nil);
+    UIBezierPath *path = [UIBezierPath bezierPathWithRect:rect];
     [self.delegate curvePathDidChange:path];
-    CGPathRelease(path);
 }
 
 - (void)addLastPoint:(CGPoint)point {
     self.finishPoint = point;
     CGRect rect = [self constructRect];
 
-    CGPathRef path = CGPathCreateWithRect(rect, nil);
+     UIBezierPath *path = [UIBezierPath bezierPathWithRect:rect];
     [self.delegate curvePathDidFinished:path];
-    CGPathRelease(path);
 }
 
-- (CGPathRef)newPath {
+- (UIBezierPath *)bezierPath {
     CGRect rect = [self constructRect];
-    CGPathRef path = CGPathCreateWithRect(rect, nil);
+    UIBezierPath *path = [UIBezierPath bezierPathWithRect:rect];
     return path;
 }
 
@@ -99,10 +97,8 @@
         }
     }];
     
-    CGPathRef p = [self newPath];;
+    UIBezierPath *p = [self bezierPath];;
     [self.delegate curvePathDidFinished:p];
-    CGPathRelease(p);
-    
 }
 
 - (UIColor *)color {

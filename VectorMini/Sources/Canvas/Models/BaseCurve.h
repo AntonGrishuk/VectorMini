@@ -13,8 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol CurveDelegate <NSObject>
 
-- (void)curvePathDidChange:(CGPathRef)path;
-- (void)curvePathDidFinished:(CGPathRef)path;
+- (void)curvePathDidChange:(UIBezierPath *)path;
+- (void)curvePathDidFinished:(UIBezierPath *)path;
 
 @end
 
@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addPoint:(CGPoint)point;
 - (void)addLastPoint:(CGPoint)point;
 - (void)constructPathFromPoints:(NSArray *)points;
-- (CGPathRef)newPath;
+- (UIBezierPath *)bezierPath;
 - (NSArray *)getPoints;
 - (UIColor *)color;
 - (void)setupId:(NSInteger)iD;

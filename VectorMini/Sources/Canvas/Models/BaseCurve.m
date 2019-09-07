@@ -20,7 +20,7 @@
 - (void)addPoint:(CGPoint)point{}
 - (void)addLastPoint:(CGPoint)point{}
 - (void)constructPathFromPoints:(NSArray *)points{}
-- (CGPathRef)newPath{return CGPathCreateMutable();}
+- (UIBezierPath *)bezierPath{return [UIBezierPath bezierPath];}
 - (NSArray *)getPoints{return nil;}
 - (UIColor *)color{return nil;}
 

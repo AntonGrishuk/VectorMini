@@ -63,9 +63,8 @@
         if ([obj isKindOfClass:[BaseCurve class]]) {
             [self.curves addObject:obj];
             self.shapeLayer.strokeColor = [[(BaseCurve *)obj color] CGColor];
-            CGPathRef p = [(BaseCurve *)obj newPath];
+            UIBezierPath *p = [(BaseCurve *)obj bezierPath];
             [self curvePathDidFinished:p];
-            CGPathRelease(p);
         }
     }];
 }
@@ -142,19 +141,15 @@
 }
 
 - (void)redraw {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        [self cleanCanvas];
-        
-        [self.curves enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if ([obj isKindOfClass:[BaseCurve class]]) {
-                self.shapeLayer.strokeColor = [[(BaseCurve *)obj color] CGColor];
-                CGPathRef p = [(BaseCurve *)obj newPath];
-                [self curvePathDidFinished:p];
-                CGPathRelease(p);
-            }
-        }];
-    });
+    [self cleanCanvas];
+    
+    [self.curves enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[BaseCurve class]]) {
+            self.shapeLayer.strokeColor = [[(BaseCurve *)obj color] CGColor];
+            UIBezierPath *p = [(BaseCurve *)obj bezierPath];
+            [self curvePathDidFinished:p];
+        }
+    }];
 }
 
 - (void)cleanCanvas {
@@ -164,12 +159,12 @@
 
 #pragma mark - CurveDelegate
 
-- (void)curvePathDidChange:(CGPathRef)path {
-    self.shapeLayer.path = path;
+- (void)curvePathDidChange:(UIBezierPath *)path {
+    self.shapeLayer.path = path.CGPath;
 }
 
-- (void)curvePathDidFinished:(nonnull CGPathRef)path {
-    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithCGPath:path];
+- (void)curvePathDidFinished:(nonnull UIBezierPath *)path {
+    UIBezierPath *bezierPath = path;
     bezierPath.lineWidth = LINE_WIDTH;
     bezierPath.lineJoinStyle = kCGLineJoinRound;
     bezierPath.lineCapStyle = kCGLineCapRound;

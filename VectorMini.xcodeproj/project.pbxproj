@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		06A24ECE23215642007CEA6B /* BaseCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A24ECD23215642007CEA6B /* BaseCurve.m */; };
+		950E72FE2323BCAA005736D1 /* UIBezierPath+Interpolation.m in Sources */ = {isa = PBXBuildFile; fileRef = 950E72FB2323BCAA005736D1 /* UIBezierPath+Interpolation.m */; };
+		950E72FF2323BCAA005736D1 /* CGPointExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 950E72FD2323BCAA005736D1 /* CGPointExtension.m */; };
 		951D1955231F1A5900AF62C0 /* DBController.m in Sources */ = {isa = PBXBuildFile; fileRef = 951D1953231F1A5900AF62C0 /* DBController.m */; };
 		951D1968231F1BD000AF62C0 /* Curve.m in Sources */ = {isa = PBXBuildFile; fileRef = 951D1958231F1BD000AF62C0 /* Curve.m */; };
 		951D1969231F1BD000AF62C0 /* Rectangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 951D195A231F1BD000AF62C0 /* Rectangle.m */; };
@@ -32,6 +34,10 @@
 		06A24ECD23215642007CEA6B /* BaseCurve.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseCurve.m; sourceTree = "<group>"; };
 		49D5D0DC7B6907E19D253D87 /* Pods-VectorMini.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VectorMini.debug.xcconfig"; path = "Target Support Files/Pods-VectorMini/Pods-VectorMini.debug.xcconfig"; sourceTree = "<group>"; };
 		81A812DCB60D6BF28507FF91 /* Pods_VectorMini.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VectorMini.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		950E72FA2323BCAA005736D1 /* UIBezierPath+Interpolation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+Interpolation.h"; sourceTree = "<group>"; };
+		950E72FB2323BCAA005736D1 /* UIBezierPath+Interpolation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+Interpolation.m"; sourceTree = "<group>"; };
+		950E72FC2323BCAA005736D1 /* CGPointExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGPointExtension.h; sourceTree = "<group>"; };
+		950E72FD2323BCAA005736D1 /* CGPointExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGPointExtension.m; sourceTree = "<group>"; };
 		951D1953231F1A5900AF62C0 /* DBController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBController.m; sourceTree = "<group>"; };
 		951D1954231F1A5900AF62C0 /* DBController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBController.h; sourceTree = "<group>"; };
 		951D1958231F1BD000AF62C0 /* Curve.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Curve.m; sourceTree = "<group>"; };
@@ -138,6 +144,10 @@
 		951D1965231F1BD000AF62C0 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				950E72FC2323BCAA005736D1 /* CGPointExtension.h */,
+				950E72FD2323BCAA005736D1 /* CGPointExtension.m */,
+				950E72FA2323BCAA005736D1 /* UIBezierPath+Interpolation.h */,
+				950E72FB2323BCAA005736D1 /* UIBezierPath+Interpolation.m */,
 				951D1966231F1BD000AF62C0 /* CAShapeLayer+Image.h */,
 				951D1967231F1BD000AF62C0 /* CAShapeLayer+Image.m */,
 			);
@@ -371,8 +381,10 @@
 				951D196C231F1BD000AF62C0 /* CanvasView.m in Sources */,
 				959AC965231AC59700BE6C9D /* AppDelegate.m in Sources */,
 				95D098DB232063CC004C7842 /* CanvasContainerViewController.m in Sources */,
+				950E72FE2323BCAA005736D1 /* UIBezierPath+Interpolation.m in Sources */,
 				951D196D231F1BD000AF62C0 /* CAShapeLayer+Image.m in Sources */,
 				951D1955231F1A5900AF62C0 /* DBController.m in Sources */,
+				950E72FF2323BCAA005736D1 /* CGPointExtension.m in Sources */,
 				951D1969231F1BD000AF62C0 /* Rectangle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
