@@ -11,12 +11,11 @@
 #import "BaseCurve.h"
 #import "CanvasView.h"
 
-#define LINE_WIDTH 1;
+#define LINE_WIDTH 5;
 
 @interface CanvasViewController ()<CurveDelegate>
 
 @property (nonatomic, strong) CAShapeLayer *shapeLayer;
-@property (nonatomic, strong) UIImage *canvasImage;
 @property (nonatomic, strong) BaseCurve *currentCurve;
 @property (nonatomic, strong) NSMutableArray *curves;
 @property (nonatomic, assign) CurveType currentCurveType;
@@ -29,7 +28,6 @@
 {
     self = [super initWithCoder:coder];
     if (self) {
-        _canvasImage = [[UIImage alloc] init];
         _curves = [NSMutableArray array];
         _currentCurveType = CurveTypeCurve;
     }
@@ -160,9 +158,8 @@
 }
 
 - (void)cleanCanvas {
-    self.view.layer.contents = nil;
     self.shapeLayer.path = nil;
-    self.canvasImage = [UIImage new];
+    [(CanvasView *)self.view clean];
 }
 
 #pragma mark - CurveDelegate
@@ -172,10 +169,13 @@
 }
 
 - (void)curvePathDidFinished:(nonnull CGPathRef)path {
-    self.shapeLayer.path = path;
-    self.canvasImage = [self.shapeLayer imageWithBackground:self.canvasImage];
+    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithCGPath:path];
+    bezierPath.lineWidth = LINE_WIDTH;
+    bezierPath.lineJoinStyle = kCGLineJoinRound;
+    bezierPath.lineCapStyle = kCGLineCapRound;
+    UIColor *color = [UIColor colorWithCGColor:self.shapeLayer.strokeColor];
+    [(CanvasView *)self.view drawPath:bezierPath withColor:color];
     self.shapeLayer.path = nil;
-    self.view.layer.contents = (__bridge id _Nullable)(self.canvasImage.CGImage);
 }
 
 @end

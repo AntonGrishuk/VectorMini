@@ -10,4 +10,7 @@
 
 @interface CanvasView : UIView
 
+- (void)drawPath:(UIBezierPath *)path withColor:(UIColor *)color;
+- (void)clean;
+
 @end
