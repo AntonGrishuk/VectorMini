@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Curve : BaseCurve
 
-@property (nonatomic, strong, readonly) NSMutableArray *points;
+@property (nonatomic, strong, readonly) NSArray *points;
 
 - (instancetype)init:(NSArray *)points color:(UIColor *)color;
 

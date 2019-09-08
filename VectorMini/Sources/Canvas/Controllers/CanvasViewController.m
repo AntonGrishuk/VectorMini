@@ -7,7 +7,6 @@
 //
 
 #import "CanvasViewController.h"
-#import "CAShapeLayer+Image.h"
 #import "BaseCurve.h"
 #import "CanvasView.h"
 

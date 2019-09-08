@@ -37,9 +37,9 @@
     self.colorView.backgroundColor = [curve color];
     self.dateLabel.text = [self.dateFormatter stringFromDate:[curve creationDate]];
     
-    if ([curve isKindOfClass:[Curve class]]) {
+    if ([curve isMemberOfClass:[Curve class]]) {
         self.nameLabel.text = @"Curve";
-    } else if ([curve isKindOfClass:[Rectangle class]]) {
+    } else if ([curve isMemberOfClass:[Rectangle class]]) {
         self.nameLabel.text = @"Rectangle";
     }
 }

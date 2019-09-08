@@ -9,6 +9,8 @@
 #import "CurvesListTableViewController.h"
 #import "CurveListTableViewCell.h"
 
+static NSInteger cellHeight = 80;
+
 @interface CurvesListTableViewController ()
 
 @property (nonatomic, strong) NSMutableArray *curves;
@@ -61,7 +63,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 80;
+    return cellHeight;
 }
 
 // Override to support conditional editing of the table view.

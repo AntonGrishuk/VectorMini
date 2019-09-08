@@ -36,6 +36,7 @@
 
 - (void)setSelectedProject:(Project *)project {
     self.project = project;
+    self.title = [project name];
 }
 
 - (void)setupDataBaseController:(DBController *)dbController {

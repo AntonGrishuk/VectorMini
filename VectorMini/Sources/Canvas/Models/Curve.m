@@ -11,7 +11,8 @@
 
 @interface Curve ()
 
-@property (nonatomic, strong, readwrite) NSMutableArray *points;
+@property (nonatomic, strong, readwrite) NSArray *points;
+@property (nonatomic, strong) NSMutableArray *mutablePoints;
 
 @end
 
@@ -22,7 +23,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _points = [NSMutableArray array];
+        _mutablePoints = [NSMutableArray array];
     }
     return self;
 }
@@ -30,15 +31,21 @@
 - (instancetype)init:(NSArray *)points color:(UIColor *)color {
     self = [super init:color];
     if (self) {
-        _points = [NSMutableArray arrayWithArray:points];
+        _mutablePoints = [NSMutableArray arrayWithArray:points];
     }
     return self;
+}
+
+#pragma mark - Accessors
+
+- (NSArray *)points {
+    return [NSArray arrayWithArray:self.mutablePoints];
 }
 
 #pragma mark - Public
 
 - (void)addPoint:(CGPoint)point {
-    [self.points addObject:[NSValue valueWithCGPoint:point]];
+    [self.mutablePoints addObject:[NSValue valueWithCGPoint:point]];
 }
 
 - (UIBezierPath *)bezierPath {

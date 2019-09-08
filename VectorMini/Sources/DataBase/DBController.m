@@ -100,7 +100,7 @@
                     [points addObject:@(point)];
                 }
                 
-                Curve *c = [[Curve alloc] init:points color:color];
+                Curve *c = [[Curve alloc] init:[NSArray arrayWithArray:points] color:color];
                 [c setupCreationDate:[NSDate dateWithTimeIntervalSince1970:date]];
                 [c setupId:lineId];
                 

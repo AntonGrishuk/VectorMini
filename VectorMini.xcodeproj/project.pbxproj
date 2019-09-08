@@ -15,7 +15,6 @@
 		951D1969231F1BD000AF62C0 /* Rectangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 951D195A231F1BD000AF62C0 /* Rectangle.m */; };
 		951D196A231F1BD000AF62C0 /* CanvasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 951D195E231F1BD000AF62C0 /* CanvasViewController.m */; };
 		951D196C231F1BD000AF62C0 /* CanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = 951D1963231F1BD000AF62C0 /* CanvasView.m */; };
-		951D196D231F1BD000AF62C0 /* CAShapeLayer+Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 951D1967231F1BD000AF62C0 /* CAShapeLayer+Image.m */; };
 		959AC965231AC59700BE6C9D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 959AC964231AC59700BE6C9D /* AppDelegate.m */; };
 		959AC96B231AC59700BE6C9D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 959AC969231AC59700BE6C9D /* Main.storyboard */; };
 		959AC96D231AC59800BE6C9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 959AC96C231AC59800BE6C9D /* Assets.xcassets */; };
@@ -48,8 +47,6 @@
 		951D1960231F1BD000AF62C0 /* CanvasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CanvasViewController.h; sourceTree = "<group>"; };
 		951D1963231F1BD000AF62C0 /* CanvasView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CanvasView.m; sourceTree = "<group>"; };
 		951D1964231F1BD000AF62C0 /* CanvasView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CanvasView.h; sourceTree = "<group>"; };
-		951D1966231F1BD000AF62C0 /* CAShapeLayer+Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAShapeLayer+Image.h"; sourceTree = "<group>"; };
-		951D1967231F1BD000AF62C0 /* CAShapeLayer+Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAShapeLayer+Image.m"; sourceTree = "<group>"; };
 		959AC960231AC59700BE6C9D /* VectorMini.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VectorMini.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		959AC963231AC59700BE6C9D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		959AC964231AC59700BE6C9D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -141,24 +138,22 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		951D1965231F1BD000AF62C0 /* Categories */ = {
+		951D1965231F1BD000AF62C0 /* CategoriesAndExtensions */ = {
 			isa = PBXGroup;
 			children = (
 				950E72FC2323BCAA005736D1 /* CGPointExtension.h */,
 				950E72FD2323BCAA005736D1 /* CGPointExtension.m */,
 				950E72FA2323BCAA005736D1 /* UIBezierPath+Interpolation.h */,
 				950E72FB2323BCAA005736D1 /* UIBezierPath+Interpolation.m */,
-				951D1966231F1BD000AF62C0 /* CAShapeLayer+Image.h */,
-				951D1967231F1BD000AF62C0 /* CAShapeLayer+Image.m */,
 			);
-			path = Categories;
+			path = CategoriesAndExtensions;
 			sourceTree = "<group>";
 		};
 		951D196E231F1BD900AF62C0 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				951D1972231F1D5700AF62C0 /* Entry point */,
-				951D1965231F1BD000AF62C0 /* Categories */,
+				951D1965231F1BD000AF62C0 /* CategoriesAndExtensions */,
 				95D098DC23206526004C7842 /* CurvesList */,
 				951D1971231F1CD800AF62C0 /* DataBase */,
 				951D1970231F1C6800AF62C0 /* Projects */,
@@ -382,7 +377,6 @@
 				959AC965231AC59700BE6C9D /* AppDelegate.m in Sources */,
 				95D098DB232063CC004C7842 /* CanvasContainerViewController.m in Sources */,
 				950E72FE2323BCAA005736D1 /* UIBezierPath+Interpolation.m in Sources */,
-				951D196D231F1BD000AF62C0 /* CAShapeLayer+Image.m in Sources */,
 				951D1955231F1A5900AF62C0 /* DBController.m in Sources */,
 				950E72FF2323BCAA005736D1 /* CGPointExtension.m in Sources */,
 				951D1969231F1BD000AF62C0 /* Rectangle.m in Sources */,
