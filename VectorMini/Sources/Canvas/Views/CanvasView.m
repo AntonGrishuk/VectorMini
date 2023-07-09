@@ -15,6 +15,8 @@
 
 @implementation CanvasView
 
+
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.drawingPaths = [NSMutableArray array];

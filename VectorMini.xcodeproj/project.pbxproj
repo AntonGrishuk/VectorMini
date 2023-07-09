@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		06A24ECE23215642007CEA6B /* BaseCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A24ECD23215642007CEA6B /* BaseCurve.m */; };
+		7288C15D2A59EFCF00211974 /* ProjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7288C15C2A59EFCF00211974 /* ProjectCell.m */; };
 		950E72FE2323BCAA005736D1 /* UIBezierPath+Interpolation.m in Sources */ = {isa = PBXBuildFile; fileRef = 950E72FB2323BCAA005736D1 /* UIBezierPath+Interpolation.m */; };
 		950E72FF2323BCAA005736D1 /* CGPointExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 950E72FD2323BCAA005736D1 /* CGPointExtension.m */; };
 		951D1955231F1A5900AF62C0 /* DBController.m in Sources */ = {isa = PBXBuildFile; fileRef = 951D1953231F1A5900AF62C0 /* DBController.m */; };
@@ -16,15 +17,12 @@
 		951D196A231F1BD000AF62C0 /* CanvasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 951D195E231F1BD000AF62C0 /* CanvasViewController.m */; };
 		951D196C231F1BD000AF62C0 /* CanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = 951D1963231F1BD000AF62C0 /* CanvasView.m */; };
 		959AC965231AC59700BE6C9D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 959AC964231AC59700BE6C9D /* AppDelegate.m */; };
-		959AC96B231AC59700BE6C9D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 959AC969231AC59700BE6C9D /* Main.storyboard */; };
 		959AC96D231AC59800BE6C9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 959AC96C231AC59800BE6C9D /* Assets.xcassets */; };
 		959AC970231AC59800BE6C9D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 959AC96E231AC59800BE6C9D /* LaunchScreen.storyboard */; };
 		959AC973231AC59800BE6C9D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 959AC972231AC59800BE6C9D /* main.m */; };
-		95C0197B23222AAF009F058C /* CurveListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95C0197A23222AAF009F058C /* CurveListTableViewCell.m */; };
 		95D098CE23204ED4004C7842 /* ProjectsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D098CD23204ED4004C7842 /* ProjectsViewController.m */; };
 		95D098D723205CDC004C7842 /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D098D623205CDC004C7842 /* Project.m */; };
 		95D098DB232063CC004C7842 /* CanvasContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D098DA232063CC004C7842 /* CanvasContainerViewController.m */; };
-		95D098DF23206578004C7842 /* CurvesListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D098DE23206578004C7842 /* CurvesListTableViewController.m */; };
 		E3A1A8E3C743BA8CAC1929A2 /* Pods_VectorMini.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81A812DCB60D6BF28507FF91 /* Pods_VectorMini.framework */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +30,8 @@
 		06A24ECC23215642007CEA6B /* BaseCurve.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseCurve.h; sourceTree = "<group>"; };
 		06A24ECD23215642007CEA6B /* BaseCurve.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseCurve.m; sourceTree = "<group>"; };
 		49D5D0DC7B6907E19D253D87 /* Pods-VectorMini.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VectorMini.debug.xcconfig"; path = "Target Support Files/Pods-VectorMini/Pods-VectorMini.debug.xcconfig"; sourceTree = "<group>"; };
+		7288C15B2A59EFCF00211974 /* ProjectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProjectCell.h; sourceTree = "<group>"; };
+		7288C15C2A59EFCF00211974 /* ProjectCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProjectCell.m; sourceTree = "<group>"; };
 		81A812DCB60D6BF28507FF91 /* Pods_VectorMini.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VectorMini.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		950E72FA2323BCAA005736D1 /* UIBezierPath+Interpolation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+Interpolation.h"; sourceTree = "<group>"; };
 		950E72FB2323BCAA005736D1 /* UIBezierPath+Interpolation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+Interpolation.m"; sourceTree = "<group>"; };
@@ -50,21 +50,16 @@
 		959AC960231AC59700BE6C9D /* VectorMini.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VectorMini.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		959AC963231AC59700BE6C9D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		959AC964231AC59700BE6C9D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		959AC96A231AC59700BE6C9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		959AC96C231AC59800BE6C9D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		959AC96F231AC59800BE6C9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		959AC971231AC59800BE6C9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		959AC972231AC59800BE6C9D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		95C0197923222AAF009F058C /* CurveListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurveListTableViewCell.h; sourceTree = "<group>"; };
-		95C0197A23222AAF009F058C /* CurveListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurveListTableViewCell.m; sourceTree = "<group>"; };
 		95D098CC23204ED4004C7842 /* ProjectsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProjectsViewController.h; sourceTree = "<group>"; };
 		95D098CD23204ED4004C7842 /* ProjectsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProjectsViewController.m; sourceTree = "<group>"; };
 		95D098D523205CDC004C7842 /* Project.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
 		95D098D623205CDC004C7842 /* Project.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Project.m; sourceTree = "<group>"; };
 		95D098D9232063CC004C7842 /* CanvasContainerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CanvasContainerViewController.h; sourceTree = "<group>"; };
 		95D098DA232063CC004C7842 /* CanvasContainerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CanvasContainerViewController.m; sourceTree = "<group>"; };
-		95D098DD23206578004C7842 /* CurvesListTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurvesListTableViewController.h; sourceTree = "<group>"; };
-		95D098DE23206578004C7842 /* CurvesListTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurvesListTableViewController.m; sourceTree = "<group>"; };
 		C40C9DCF9DC8D9C1C959DAA2 /* Pods-VectorMini.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VectorMini.release.xcconfig"; path = "Target Support Files/Pods-VectorMini/Pods-VectorMini.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -154,7 +149,6 @@
 			children = (
 				951D1972231F1D5700AF62C0 /* Entry point */,
 				951D1965231F1BD000AF62C0 /* CategoriesAndExtensions */,
-				95D098DC23206526004C7842 /* CurvesList */,
 				951D1971231F1CD800AF62C0 /* DataBase */,
 				951D1970231F1C6800AF62C0 /* Projects */,
 				95D098D82320635D004C7842 /* CanvasContainer */,
@@ -166,7 +160,6 @@
 		951D196F231F1C2300AF62C0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				959AC969231AC59700BE6C9D /* Main.storyboard */,
 				959AC96C231AC59800BE6C9D /* Assets.xcassets */,
 				959AC96E231AC59800BE6C9D /* LaunchScreen.storyboard */,
 				959AC971231AC59800BE6C9D /* Info.plist */,
@@ -181,6 +174,8 @@
 				95D098CD23204ED4004C7842 /* ProjectsViewController.m */,
 				95D098D523205CDC004C7842 /* Project.h */,
 				95D098D623205CDC004C7842 /* Project.m */,
+				7288C15B2A59EFCF00211974 /* ProjectCell.h */,
+				7288C15C2A59EFCF00211974 /* ProjectCell.m */,
 			);
 			path = Projects;
 			sourceTree = "<group>";
@@ -238,17 +233,6 @@
 				95D098DA232063CC004C7842 /* CanvasContainerViewController.m */,
 			);
 			path = CanvasContainer;
-			sourceTree = "<group>";
-		};
-		95D098DC23206526004C7842 /* CurvesList */ = {
-			isa = PBXGroup;
-			children = (
-				95D098DD23206578004C7842 /* CurvesListTableViewController.h */,
-				95D098DE23206578004C7842 /* CurvesListTableViewController.m */,
-				95C0197923222AAF009F058C /* CurveListTableViewCell.h */,
-				95C0197A23222AAF009F058C /* CurveListTableViewCell.m */,
-			);
-			path = CurvesList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -312,7 +296,6 @@
 			files = (
 				959AC970231AC59800BE6C9D /* LaunchScreen.storyboard in Resources */,
 				959AC96D231AC59800BE6C9D /* Assets.xcassets in Resources */,
-				959AC96B231AC59700BE6C9D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,8 +351,6 @@
 				06A24ECE23215642007CEA6B /* BaseCurve.m in Sources */,
 				95D098CE23204ED4004C7842 /* ProjectsViewController.m in Sources */,
 				951D1968231F1BD000AF62C0 /* Curve.m in Sources */,
-				95C0197B23222AAF009F058C /* CurveListTableViewCell.m in Sources */,
-				95D098DF23206578004C7842 /* CurvesListTableViewController.m in Sources */,
 				959AC973231AC59800BE6C9D /* main.m in Sources */,
 				95D098D723205CDC004C7842 /* Project.m in Sources */,
 				951D196A231F1BD000AF62C0 /* CanvasViewController.m in Sources */,
@@ -380,20 +361,13 @@
 				951D1955231F1A5900AF62C0 /* DBController.m in Sources */,
 				950E72FF2323BCAA005736D1 /* CGPointExtension.m in Sources */,
 				951D1969231F1BD000AF62C0 /* Rectangle.m in Sources */,
+				7288C15D2A59EFCF00211974 /* ProjectCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		959AC969231AC59700BE6C9D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				959AC96A231AC59700BE6C9D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		959AC96E231AC59800BE6C9D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

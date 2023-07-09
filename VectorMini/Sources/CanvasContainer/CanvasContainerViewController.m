@@ -8,39 +8,47 @@
 
 #import "CanvasContainerViewController.h"
 #import "CanvasViewController.h"
-#import "CurvesListTableViewController.h"
 
-@interface CanvasContainerViewController ()<CanvasViewControllerDelegate, CurvesListTableViewControllerDelegate>
+@interface CanvasContainerViewController ()<CanvasViewControllerDelegate>
 @property (nonatomic, strong) Project *project;
 @property (nonatomic, strong) DBController *dbController;
+@property (nonatomic, strong) UIView *canvasContainer;
+@property (nonatomic, strong) CanvasViewController *canvasViewController;
 @end
 
 @implementation CanvasContainerViewController
 
+- (instancetype)initWithProject:(Project *)project
+                   dbController:(DBController *)dbController {
+    self = [super initWithNibName:nil bundle:nil];
+    if (self) {
+        self.dbController = dbController;
+        self.project = project;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.canvasViewController = [[CanvasViewController alloc] init];
+    self.canvasContainer = [UIView new];
+    [self.view addSubview:self.canvasContainer];
+    [self.canvasContainer setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [NSLayoutConstraint activateConstraints:@[
+        [self.canvasContainer.topAnchor constraintEqualToAnchor:self.view.topAnchor],
+        [self.canvasContainer.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
+        [self.canvasContainer.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
+        [self.canvasContainer.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor]
+    ]];
+    [self configureCanvas];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [[self canvasViewController] setDelegate:self];
-    [[self curvesListViewController] setDelegate:self];
+    self.title = [self.project name];
     [self fetchCurves:^(NSArray<BaseCurve *> *figures) {
-        CanvasViewController *canvasVC = [self canvasViewController];
-        CurvesListTableViewController *curvesListVC = [self curvesListViewController];
-        [canvasVC setupCurves:figures];
-        [curvesListVC setupCurves:figures];
+        [self.canvasViewController setupCurves:figures];
     }];
-}
-
-- (void)setSelectedProject:(Project *)project {
-    self.project = project;
-    self.title = [project name];
-}
-
-- (void)setupDataBaseController:(DBController *)dbController {
-    self.dbController = dbController;
 }
 
 - (void)fetchCurves:(void(^)(NSArray<BaseCurve *>* figures))completion {
@@ -77,26 +85,21 @@
      return (UISplitViewController *)[[self childViewControllers] firstObject];
 }
 
-- (CanvasViewController *)canvasViewController {
-    UISplitViewController *split = [self canvasSplitViewController];
-    for (UIViewController *vc in [split viewControllers]) {
-        if ([vc isKindOfClass:[CanvasViewController class]]) {
-            return (CanvasViewController *)vc;
-        }
-    }
+- (void)configureCanvas {
+    [self addChildViewController:self.canvasViewController];
+    [self.canvasContainer addSubview:self.canvasViewController.view];
+    UIView *canvasView = self.canvasViewController.view;
+    canvasView.translatesAutoresizingMaskIntoConstraints = NO;
+    [NSLayoutConstraint activateConstraints:@[
+        [canvasView.topAnchor constraintEqualToAnchor:self.canvasContainer.topAnchor],
+        [canvasView.bottomAnchor constraintEqualToAnchor:self.canvasContainer.bottomAnchor],
+        [canvasView.leadingAnchor constraintEqualToAnchor:self.canvasContainer.leadingAnchor],
+        [canvasView.trailingAnchor constraintEqualToAnchor:self.canvasContainer.trailingAnchor]
+    ]];
+      
+    [self.canvasViewController didMoveToParentViewController:self];
     
-    return nil;
-}
-
-- (CurvesListTableViewController *)curvesListViewController {
-    UISplitViewController *split = [self canvasSplitViewController];
-    for (UIViewController *vc in [split viewControllers]) {
-        if ([vc isKindOfClass:[CurvesListTableViewController class]]) {
-            return (CurvesListTableViewController *)vc;
-        }
-    }
-    
-    return nil;
+    [[self canvasViewController] setDelegate:self];
 }
 
 - (IBAction)onChangeValue:(UISegmentedControl *)sender {
@@ -127,9 +130,6 @@
      {
          if (result) {
              [(*curve) setupId:curveId];
-             
-             CurvesListTableViewController *curvesListVC = [weakSelf curvesListViewController];
-             [curvesListVC addCurve:(*curve)];
          }
      }];
 }
@@ -143,23 +143,8 @@
      {
          if (result) {
              [(*rectangle) setupId:curveId];
-             
-             CurvesListTableViewController *curvesListVC = [weakSelf curvesListViewController];
-             [curvesListVC addCurve:(*rectangle)];
          }
      }];
-}
-
-#pragma mark - CurvesListTableViewControllerDelegate
-
-- (void)didRemoveCurveFromCurvesList:(BaseCurve *)curve {
-    [self.dbController removeCurve:curve projectId: [self.project iD]];
-    [self fetchCurves:^(NSArray<BaseCurve *> *figures) {
-        CanvasViewController *canvasVC = [self canvasViewController];
-        CurvesListTableViewController *curvesListVC = [self curvesListViewController];
-        [canvasVC setupCurves:figures];
-        [curvesListVC setupCurves:figures];
-    }];
 }
 
 @end

@@ -7,8 +7,11 @@
 //
 
 #import "AppDelegate.h"
+#import "ProjectsViewController.h"
 
 @interface AppDelegate ()
+
+@property (nonatomic, strong) UINavigationController *navigationControlelr;
 
 @end
 
@@ -16,7 +19,12 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    self.window = [UIWindow new];
+    self.navigationControlelr = [UINavigationController new];
+    [self.window setRootViewController: self.navigationControlelr];
+    UIViewController *projectsViewController = [[ProjectsViewController alloc] init];
+    [self.navigationControlelr setViewControllers:@[projectsViewController]];
+    [self.window makeKeyAndVisible];
     return YES;
 }
 

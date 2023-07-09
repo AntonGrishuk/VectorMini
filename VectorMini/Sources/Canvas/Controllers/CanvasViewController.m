@@ -23,9 +23,8 @@
 
 @implementation CanvasViewController
 
-- (instancetype)initWithCoder:(NSCoder *)coder
-{
-    self = [super initWithCoder:coder];
+- (instancetype)init {
+    self = [super initWithNibName:nil bundle:nil];
     if (self) {
         _curves = [NSMutableArray array];
         _currentCurveType = CurveTypeCurve;
@@ -35,11 +34,16 @@
 
 #pragma mark - View life cycle
 
+- (void)loadView {
+    self.view = [[CanvasView alloc] initWithFrame: CGRectZero];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.shapeLayer = [[CAShapeLayer alloc] init];
     [self.view.layer addSublayer:self.shapeLayer];
+    self.view.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)viewDidLayoutSubviews {

@@ -13,10 +13,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CanvasContainerViewController : UIViewController
-
-- (void)setSelectedProject:(Project *)project;
-- (void)setupDataBaseController:(DBController *)dbController;
-
+- (instancetype)initWithProject:(Project *)project dbController:(DBController *)dbController;
 @end
 
 NS_ASSUME_NONNULL_END
