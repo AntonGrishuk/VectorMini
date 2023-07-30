@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DrawObject.h"
 
 @interface CanvasView : UIView
 
-- (void)drawPath:(UIBezierPath *)path withColor:(UIColor *)color;
-- (void)clean;
+- (void)redrawWithObjects:(NSArray<DrawObject *> *)drawObjects;
 
 @end

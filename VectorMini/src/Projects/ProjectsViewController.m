@@ -7,15 +7,15 @@
 //
 #import "ProjectsViewController.h"
 #import "CanvasContainerViewController.h"
-#import "DBController.h"
 #import "Project.h"
 #import "ProjectCell.h"
+#import "ProjectsStorage.h"
 
 @interface ProjectsViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) DBController *dbController;
 @property (nonatomic, strong) NSMutableArray<Project *> *projects;
+@property (nonatomic, strong) ProjectsStorage *storage;
 
 @end
 
@@ -24,16 +24,13 @@
 - (instancetype)init {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
-        _projects = [NSMutableArray array];
+        _storage = [[ProjectsStorage alloc] init];
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.dbController = [DBController new];
-    [self.dbController start];
-    [self fetchProjects];
     
     self.tableView = [UITableView new];
     self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -55,25 +52,47 @@
     [self.navigationItem setRightBarButtonItem:plusButton];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self fetchProjects];
+}
+
 
 #pragma mark - Navigation
 
 - (void)onAddProject:(UIBarButtonItem *)sender {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Create new project" message:@"Enter project name" preferredStyle:UIAlertControllerStyleAlert];
+    [alert addTextFieldWithConfigurationHandler: nil];
     __weak ProjectsViewController *weakSelf = self;
-    [self.dbController addProject:^(Project * _Nullable project) {
-        if (project) {
-            [weakSelf.projects addObject:project];
-            [weakSelf.tableView reloadData];
-        }
-    }];
+
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
+                                              style:UIAlertActionStyleCancel
+                                            handler:^(UIAlertAction * _Nonnull action) {
+        [alert dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"Create"
+                                              style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction * _Nonnull action) {
+        NSString *name = alert.textFields.firstObject.text;
+        Project *project = [[Project alloc] initWithId:[NSUUID UUID]
+                                                  name:name
+                                           drawObjects:@[]];
+        [weakSelf.projects addObject:project];
+        NSError *error;
+        [weakSelf.storage saveProject:project error:&error];
+        NSAssert1(error == nil, @"Error: %@", [error debugDescription]);
+        [weakSelf.tableView reloadData];
+        [alert dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)fetchProjects {
-    __weak ProjectsViewController *weakSelf = self;
-    [self.dbController fetchProjects:^(NSArray * _Nonnull results) {
-        weakSelf.projects = [NSMutableArray arrayWithArray:results];
-        [weakSelf.tableView reloadData];
-    }];
+    self.projects = [NSMutableArray arrayWithArray:[self.storage getProjects]];
+    [self.tableView reloadData];
 }
 
 #pragma mark - UITableViewDataSource
@@ -102,8 +121,24 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Project *project = [self.projects objectAtIndex:indexPath.row];
 
-    CanvasContainerViewController *canvasContainer = [[CanvasContainerViewController alloc] initWithProject: project dbController:self.dbController];
+    CanvasContainerViewController *canvasContainer = [[CanvasContainerViewController alloc] initWithProject: project];
     [self.navigationController pushViewController:canvasContainer animated:YES];
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+forRowAtIndexPath:(NSIndexPath *)indexPath {
+    Project *p = [self.projects objectAtIndex:indexPath.row];
+    NSError *error;
+    [self.storage deleteProject:p error:&error];
+    
+    NSAssert1(!error, @"Error: %@", [error userInfo]);
+    
+    [self.projects removeObject:p];
+    [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 @end

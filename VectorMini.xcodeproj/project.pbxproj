@@ -3,17 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		06A24ECE23215642007CEA6B /* BaseCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A24ECD23215642007CEA6B /* BaseCurve.m */; };
+		725EB43A2A7564320087A59F /* DrawObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 725EB4392A7564320087A59F /* DrawObject.m */; };
+		725EB43F2A757DF60087A59F /* CurveObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 725EB43E2A757DF60087A59F /* CurveObject.m */; };
 		7288C15D2A59EFCF00211974 /* ProjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7288C15C2A59EFCF00211974 /* ProjectCell.m */; };
+		7297126B2A76DF3A00B7ACD5 /* ProjectsStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7297126A2A76DF3A00B7ACD5 /* ProjectsStorage.m */; };
 		950E72FE2323BCAA005736D1 /* UIBezierPath+Interpolation.m in Sources */ = {isa = PBXBuildFile; fileRef = 950E72FB2323BCAA005736D1 /* UIBezierPath+Interpolation.m */; };
 		950E72FF2323BCAA005736D1 /* CGPointExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 950E72FD2323BCAA005736D1 /* CGPointExtension.m */; };
-		951D1955231F1A5900AF62C0 /* DBController.m in Sources */ = {isa = PBXBuildFile; fileRef = 951D1953231F1A5900AF62C0 /* DBController.m */; };
-		951D1968231F1BD000AF62C0 /* Curve.m in Sources */ = {isa = PBXBuildFile; fileRef = 951D1958231F1BD000AF62C0 /* Curve.m */; };
-		951D1969231F1BD000AF62C0 /* Rectangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 951D195A231F1BD000AF62C0 /* Rectangle.m */; };
 		951D196A231F1BD000AF62C0 /* CanvasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 951D195E231F1BD000AF62C0 /* CanvasViewController.m */; };
 		951D196C231F1BD000AF62C0 /* CanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = 951D1963231F1BD000AF62C0 /* CanvasView.m */; };
 		959AC965231AC59700BE6C9D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 959AC964231AC59700BE6C9D /* AppDelegate.m */; };
@@ -23,26 +22,21 @@
 		95D098CE23204ED4004C7842 /* ProjectsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D098CD23204ED4004C7842 /* ProjectsViewController.m */; };
 		95D098D723205CDC004C7842 /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D098D623205CDC004C7842 /* Project.m */; };
 		95D098DB232063CC004C7842 /* CanvasContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D098DA232063CC004C7842 /* CanvasContainerViewController.m */; };
-		E3A1A8E3C743BA8CAC1929A2 /* Pods_VectorMini.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81A812DCB60D6BF28507FF91 /* Pods_VectorMini.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		06A24ECC23215642007CEA6B /* BaseCurve.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseCurve.h; sourceTree = "<group>"; };
-		06A24ECD23215642007CEA6B /* BaseCurve.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseCurve.m; sourceTree = "<group>"; };
-		49D5D0DC7B6907E19D253D87 /* Pods-VectorMini.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VectorMini.debug.xcconfig"; path = "Target Support Files/Pods-VectorMini/Pods-VectorMini.debug.xcconfig"; sourceTree = "<group>"; };
+		725EB4382A7564320087A59F /* DrawObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawObject.h; sourceTree = "<group>"; };
+		725EB4392A7564320087A59F /* DrawObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawObject.m; sourceTree = "<group>"; };
+		725EB43D2A757DF60087A59F /* CurveObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurveObject.h; sourceTree = "<group>"; };
+		725EB43E2A757DF60087A59F /* CurveObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurveObject.m; sourceTree = "<group>"; };
 		7288C15B2A59EFCF00211974 /* ProjectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProjectCell.h; sourceTree = "<group>"; };
 		7288C15C2A59EFCF00211974 /* ProjectCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProjectCell.m; sourceTree = "<group>"; };
-		81A812DCB60D6BF28507FF91 /* Pods_VectorMini.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VectorMini.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		729712692A76DF3A00B7ACD5 /* ProjectsStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProjectsStorage.h; sourceTree = "<group>"; };
+		7297126A2A76DF3A00B7ACD5 /* ProjectsStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProjectsStorage.m; sourceTree = "<group>"; };
 		950E72FA2323BCAA005736D1 /* UIBezierPath+Interpolation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+Interpolation.h"; sourceTree = "<group>"; };
 		950E72FB2323BCAA005736D1 /* UIBezierPath+Interpolation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+Interpolation.m"; sourceTree = "<group>"; };
 		950E72FC2323BCAA005736D1 /* CGPointExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGPointExtension.h; sourceTree = "<group>"; };
 		950E72FD2323BCAA005736D1 /* CGPointExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGPointExtension.m; sourceTree = "<group>"; };
-		951D1953231F1A5900AF62C0 /* DBController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBController.m; sourceTree = "<group>"; };
-		951D1954231F1A5900AF62C0 /* DBController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBController.h; sourceTree = "<group>"; };
-		951D1958231F1BD000AF62C0 /* Curve.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Curve.m; sourceTree = "<group>"; };
-		951D195A231F1BD000AF62C0 /* Rectangle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rectangle.m; sourceTree = "<group>"; };
-		951D195B231F1BD000AF62C0 /* Curve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Curve.h; sourceTree = "<group>"; };
-		951D195C231F1BD000AF62C0 /* Rectangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rectangle.h; sourceTree = "<group>"; };
 		951D195E231F1BD000AF62C0 /* CanvasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CanvasViewController.m; sourceTree = "<group>"; };
 		951D1960231F1BD000AF62C0 /* CanvasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CanvasViewController.h; sourceTree = "<group>"; };
 		951D1963231F1BD000AF62C0 /* CanvasView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CanvasView.m; sourceTree = "<group>"; };
@@ -60,7 +54,6 @@
 		95D098D623205CDC004C7842 /* Project.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Project.m; sourceTree = "<group>"; };
 		95D098D9232063CC004C7842 /* CanvasContainerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CanvasContainerViewController.h; sourceTree = "<group>"; };
 		95D098DA232063CC004C7842 /* CanvasContainerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CanvasContainerViewController.m; sourceTree = "<group>"; };
-		C40C9DCF9DC8D9C1C959DAA2 /* Pods-VectorMini.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VectorMini.release.xcconfig"; path = "Target Support Files/Pods-VectorMini/Pods-VectorMini.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +61,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3A1A8E3C743BA8CAC1929A2 /* Pods_VectorMini.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,41 +70,53 @@
 		6FCFB53CD3B3AE6C3F4B16BE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				81A812DCB60D6BF28507FF91 /* Pods_VectorMini.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		9145DC93A548DECBFC2017D0 /* Pods */ = {
+		725EB43B2A757DC30087A59F /* Drawing */ = {
 			isa = PBXGroup;
 			children = (
-				49D5D0DC7B6907E19D253D87 /* Pods-VectorMini.debug.xcconfig */,
-				C40C9DCF9DC8D9C1C959DAA2 /* Pods-VectorMini.release.xcconfig */,
+				725EB43C2A757DE00087A59F /* CurveObject */,
+				726E47552A6C837F00E46772 /* DrawObject */,
 			);
-			path = Pods;
+			path = Drawing;
+			sourceTree = "<group>";
+		};
+		725EB43C2A757DE00087A59F /* CurveObject */ = {
+			isa = PBXGroup;
+			children = (
+				725EB43D2A757DF60087A59F /* CurveObject.h */,
+				725EB43E2A757DF60087A59F /* CurveObject.m */,
+			);
+			path = CurveObject;
+			sourceTree = "<group>";
+		};
+		726E47552A6C837F00E46772 /* DrawObject */ = {
+			isa = PBXGroup;
+			children = (
+				725EB4382A7564320087A59F /* DrawObject.h */,
+				725EB4392A7564320087A59F /* DrawObject.m */,
+			);
+			path = DrawObject;
+			sourceTree = "<group>";
+		};
+		729712682A76DF0800B7ACD5 /* ProjectsStorage */ = {
+			isa = PBXGroup;
+			children = (
+				729712692A76DF3A00B7ACD5 /* ProjectsStorage.h */,
+				7297126A2A76DF3A00B7ACD5 /* ProjectsStorage.m */,
+			);
+			path = ProjectsStorage;
 			sourceTree = "<group>";
 		};
 		951D1956231F1BD000AF62C0 /* Canvas */ = {
 			isa = PBXGroup;
 			children = (
-				951D1957231F1BD000AF62C0 /* Models */,
 				951D195D231F1BD000AF62C0 /* Controllers */,
 				951D1962231F1BD000AF62C0 /* Views */,
 			);
 			path = Canvas;
-			sourceTree = "<group>";
-		};
-		951D1957231F1BD000AF62C0 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				06A24ECC23215642007CEA6B /* BaseCurve.h */,
-				06A24ECD23215642007CEA6B /* BaseCurve.m */,
-				951D195B231F1BD000AF62C0 /* Curve.h */,
-				951D1958231F1BD000AF62C0 /* Curve.m */,
-				951D195C231F1BD000AF62C0 /* Rectangle.h */,
-				951D195A231F1BD000AF62C0 /* Rectangle.m */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		951D195D231F1BD000AF62C0 /* Controllers */ = {
@@ -144,27 +148,28 @@
 			path = CategoriesAndExtensions;
 			sourceTree = "<group>";
 		};
-		951D196E231F1BD900AF62C0 /* Sources */ = {
+		951D196E231F1BD900AF62C0 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				951D1972231F1D5700AF62C0 /* Entry point */,
-				951D1965231F1BD000AF62C0 /* CategoriesAndExtensions */,
-				951D1971231F1CD800AF62C0 /* DataBase */,
+				729712682A76DF0800B7ACD5 /* ProjectsStorage */,
+				725EB43B2A757DC30087A59F /* Drawing */,
 				951D1970231F1C6800AF62C0 /* Projects */,
+				951D1965231F1BD000AF62C0 /* CategoriesAndExtensions */,
+				951D1972231F1D5700AF62C0 /* Entry point */,
 				95D098D82320635D004C7842 /* CanvasContainer */,
 				951D1956231F1BD000AF62C0 /* Canvas */,
 			);
-			path = Sources;
+			path = src;
 			sourceTree = "<group>";
 		};
-		951D196F231F1C2300AF62C0 /* Resources */ = {
+		951D196F231F1C2300AF62C0 /* resources */ = {
 			isa = PBXGroup;
 			children = (
 				959AC96C231AC59800BE6C9D /* Assets.xcassets */,
 				959AC96E231AC59800BE6C9D /* LaunchScreen.storyboard */,
 				959AC971231AC59800BE6C9D /* Info.plist */,
 			);
-			path = Resources;
+			path = resources;
 			sourceTree = "<group>";
 		};
 		951D1970231F1C6800AF62C0 /* Projects */ = {
@@ -178,15 +183,6 @@
 				7288C15C2A59EFCF00211974 /* ProjectCell.m */,
 			);
 			path = Projects;
-			sourceTree = "<group>";
-		};
-		951D1971231F1CD800AF62C0 /* DataBase */ = {
-			isa = PBXGroup;
-			children = (
-				951D1954231F1A5900AF62C0 /* DBController.h */,
-				951D1953231F1A5900AF62C0 /* DBController.m */,
-			);
-			path = DataBase;
 			sourceTree = "<group>";
 		};
 		951D1972231F1D5700AF62C0 /* Entry point */ = {
@@ -204,7 +200,6 @@
 			children = (
 				959AC962231AC59700BE6C9D /* VectorMini */,
 				959AC961231AC59700BE6C9D /* Products */,
-				9145DC93A548DECBFC2017D0 /* Pods */,
 				6FCFB53CD3B3AE6C3F4B16BE /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -220,8 +215,8 @@
 		959AC962231AC59700BE6C9D /* VectorMini */ = {
 			isa = PBXGroup;
 			children = (
-				951D196F231F1C2300AF62C0 /* Resources */,
-				951D196E231F1BD900AF62C0 /* Sources */,
+				951D196F231F1C2300AF62C0 /* resources */,
+				951D196E231F1BD900AF62C0 /* src */,
 			);
 			path = VectorMini;
 			sourceTree = "<group>";
@@ -242,11 +237,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 959AC976231AC59800BE6C9D /* Build configuration list for PBXNativeTarget "VectorMini" */;
 			buildPhases = (
-				FE9DF32312ECB66D88D639CA /* [CP] Check Pods Manifest.lock */,
 				959AC95C231AC59700BE6C9D /* Sources */,
 				959AC95D231AC59700BE6C9D /* Frameworks */,
 				959AC95E231AC59700BE6C9D /* Resources */,
-				7518193EAF8D27EE06C92D53 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -263,7 +256,8 @@
 		959AC958231AC59700BE6C9D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1030;
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = "Anton Grishuk";
 				TargetAttributes = {
 					959AC95F231AC59700BE6C9D = {
@@ -301,67 +295,24 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		7518193EAF8D27EE06C92D53 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VectorMini/Pods-VectorMini-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VectorMini/Pods-VectorMini-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VectorMini/Pods-VectorMini-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FE9DF32312ECB66D88D639CA /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-VectorMini-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		959AC95C231AC59700BE6C9D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06A24ECE23215642007CEA6B /* BaseCurve.m in Sources */,
 				95D098CE23204ED4004C7842 /* ProjectsViewController.m in Sources */,
-				951D1968231F1BD000AF62C0 /* Curve.m in Sources */,
+				7297126B2A76DF3A00B7ACD5 /* ProjectsStorage.m in Sources */,
 				959AC973231AC59800BE6C9D /* main.m in Sources */,
 				95D098D723205CDC004C7842 /* Project.m in Sources */,
 				951D196A231F1BD000AF62C0 /* CanvasViewController.m in Sources */,
 				951D196C231F1BD000AF62C0 /* CanvasView.m in Sources */,
 				959AC965231AC59700BE6C9D /* AppDelegate.m in Sources */,
+				725EB43A2A7564320087A59F /* DrawObject.m in Sources */,
 				95D098DB232063CC004C7842 /* CanvasContainerViewController.m in Sources */,
 				950E72FE2323BCAA005736D1 /* UIBezierPath+Interpolation.m in Sources */,
-				951D1955231F1A5900AF62C0 /* DBController.m in Sources */,
 				950E72FF2323BCAA005736D1 /* CGPointExtension.m in Sources */,
-				951D1969231F1BD000AF62C0 /* Rectangle.m in Sources */,
 				7288C15D2A59EFCF00211974 /* ProjectCell.m in Sources */,
+				725EB43F2A757DF60087A59F /* CurveObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +356,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -464,6 +416,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -493,7 +446,6 @@
 		};
 		959AC977231AC59800BE6C9D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 49D5D0DC7B6907E19D253D87 /* Pods-VectorMini.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -513,7 +465,6 @@
 		};
 		959AC978231AC59800BE6C9D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C40C9DCF9DC8D9C1C959DAA2 /* Pods-VectorMini.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
