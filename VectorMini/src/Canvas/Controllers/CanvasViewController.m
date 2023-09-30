@@ -9,6 +9,7 @@
 #import "CanvasViewController.h"
 #import "CanvasView.h"
 #import "CurveObject.h"
+#import "RectangleObject.h"
 #import "DrawObject.h"
 
 #define LINE_WIDTH 5;
@@ -17,6 +18,7 @@
 
 @property (nonatomic, strong) Project *project;
 @property (nonatomic, strong) CanvasView *view;
+@property (nonatomic, assign) ToolType selectedToolType;
 
 @end
 
@@ -28,6 +30,7 @@
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
         self.project = project;
+        self.selectedToolType = Curve;
     }
     return self;
 }
@@ -51,15 +54,30 @@
 
 #pragma mark - Public
 
+- (void)selectTool:(ToolType)type {
+    self.selectedToolType = type;
+}
+
 #pragma mark - Touches handling
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self.view];
+    DrawObject *drawObject;
+    switch (self.selectedToolType) {
+        case Curve:
+            drawObject = [[CurveObject alloc] initWithObjectId:[NSUUID UUID] 
+                                                         color:[[UIColor blackColor] CGColor]];
+            break;
+            
+        case Rectangle:
+            drawObject = [[RectangleObject alloc] initWithObjectId:[NSUUID UUID]
+                                                             color:[[UIColor blackColor] CGColor]];
+            break;
+    }
     
-    CurveObject *curve = [[CurveObject alloc] initWithObjectId:[NSUUID UUID] color:[[UIColor blackColor] CGColor]];
-    [curve addPoint:point];
-    [self.project addDrawObject:curve];
+    [drawObject add:point];
+    [self.project addDrawObject:drawObject];
     
     [self.view redrawWithObjects:self.project.drawObjects];
 }
@@ -67,11 +85,8 @@
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self.view];
-    DrawObject *lastDrawObject = self.project.drawObjects.lastObject;
-    if ([lastDrawObject isMemberOfClass:CurveObject.class]) {
-        CurveObject *curve = (CurveObject *)lastDrawObject;
-        [curve addPoint:point];
-    }
+    DrawObject *drawObject = self.project.drawObjects.lastObject;
+    [drawObject add:point];
     
     [self.view redrawWithObjects:self.project.drawObjects];
 }
@@ -79,11 +94,8 @@
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self.view];
-    DrawObject *lastDrawObject = self.project.drawObjects.lastObject;
-    if ([lastDrawObject isMemberOfClass:CurveObject.class]) {
-        CurveObject *curve = (CurveObject *)lastDrawObject;
-        [curve addPoint:point];
-    }
+    DrawObject *drawObject = self.project.drawObjects.lastObject;
+    [drawObject add:point];
     
     [self.view redrawWithObjects:self.project.drawObjects];
     [self.project save];
@@ -92,11 +104,8 @@
 - (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self.view];
-    DrawObject *lastDrawObject = self.project.drawObjects.lastObject;
-    if ([lastDrawObject isMemberOfClass:CurveObject.class]) {
-        CurveObject *curve = (CurveObject *)lastDrawObject;
-        [curve addPoint:point];
-    }
+    DrawObject *drawObject = self.project.drawObjects.lastObject;
+    [drawObject add:point];
     
     [self.view redrawWithObjects:self.project.drawObjects];
 }

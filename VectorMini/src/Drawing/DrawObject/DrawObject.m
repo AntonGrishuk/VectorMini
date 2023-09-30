@@ -20,4 +20,7 @@
     return self;
 }
 
+- (void)add:(CGPoint)point {}
+- (UIBezierPath *)path { return nil; }
+
 @end

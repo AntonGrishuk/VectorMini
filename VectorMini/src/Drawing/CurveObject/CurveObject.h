@@ -13,8 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CurveObject: DrawObject<NSSecureCoding>
 
-- (instancetype)initWithObjectId:(NSUUID *)objectId color:(CGColorRef)color;
-- (void)addPoint:(CGPoint) point;
 - (NSUInteger)pointsCount;
 - (CGPoint)pointAtIndex:(NSUInteger)index;
 

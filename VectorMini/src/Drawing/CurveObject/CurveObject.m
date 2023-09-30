@@ -35,11 +35,30 @@
     [coder encodeObject:self.points forKey:@"points"];
 }
 
+- (UIBezierPath *)path {
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    
+    NSUInteger pointsCount = [self pointsCount];
+    if (pointsCount == 0) {
+        return nil;
+    }
+    [path moveToPoint:[self pointAtIndex:0]];
+    
+    for (NSUInteger i = 0; i < pointsCount; i++) {
+        [path addLineToPoint:[self pointAtIndex:i]];
+    }
+    
+    path.lineWidth = 2;
+    path.lineCapStyle = kCGLineCapRound;
+    path.lineJoinStyle = kCGLineJoinRound;
+    return  path;
+}
+
 + (BOOL)supportsSecureCoding {
     return YES;
 }
 
-- (void)addPoint:(CGPoint) point {
+- (void)add:(CGPoint) point {
     [self.points addObject:[NSValue valueWithCGPoint:point]];
 }
 

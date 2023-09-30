@@ -13,6 +13,7 @@
 @property (nonatomic, strong) Project *project;
 @property (nonatomic, strong) UIView *canvasContainer;
 @property (nonatomic, strong) CanvasViewController *canvasViewController;
+@property (nonatomic, strong) UIToolbar *toolbar;
 @end
 
 @implementation CanvasContainerViewController
@@ -27,20 +28,41 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self configureToolbad];
+    [self configureCanvas];
+}
+
+- (void)configureToolbad {
+    self.toolbar = [[UIToolbar alloc] init];
+    self.toolbar.translatesAutoresizingMaskIntoConstraints = NO;
+    self.toolbar.frame = CGRectMake(0, 60, self.view.frame.size.width, 60);
+    NSMutableArray *items = [[NSMutableArray alloc] init];
+    [items addObject:[[UIBarButtonItem alloc] initWithTitle:@"Tools" menu:[self toolsMenu]]];
+    [self.toolbar setItems:items animated:NO];
+    [self.view addSubview:self.toolbar];
+    
+    [NSLayoutConstraint activateConstraints:@[
+        [self.toolbar.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor],
+        [self.toolbar.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
+        [self.toolbar.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor],
+        [self.toolbar.heightAnchor constraintEqualToConstant:60]
+    ]];
+}
+
+- (void)configureCanvas {
+    self.view.backgroundColor = [UIColor whiteColor];
     self.canvasViewController = [[CanvasViewController alloc] initWithDrawObjects:self.project];
     self.canvasContainer = [UIView new];
     [self.view addSubview:self.canvasContainer];
     [self.canvasContainer setTranslatesAutoresizingMaskIntoConstraints:NO];
     [NSLayoutConstraint activateConstraints:@[
-        [self.canvasContainer.topAnchor constraintEqualToAnchor:self.view.topAnchor],
+        [self.canvasContainer.topAnchor constraintEqualToAnchor:self.toolbar.bottomAnchor],
         [self.canvasContainer.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
         [self.canvasContainer.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
         [self.canvasContainer.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor]
     ]];
-    [self configureCanvas];
-}
-
-- (void)configureCanvas {
+    
     [self addChildViewController:self.canvasViewController];
     [self.canvasContainer addSubview:self.canvasViewController.view];
     UIView *canvasView = self.canvasViewController.view;
@@ -54,5 +76,18 @@
       
     [self.canvasViewController didMoveToParentViewController:self];
 }
+
+- (UIMenu *) toolsMenu {
+    __weak CanvasContainerViewController *weakSelf = self;
+    UIAction *curveItem = [UIAction actionWithTitle:@"curve" image:nil identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
+        [weakSelf.canvasViewController selectTool: Curve];
+    }];
+    UIAction *rectangleItem = [UIAction actionWithTitle:@"rectangle" image:nil identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
+        [weakSelf.canvasViewController selectTool: Rectangle];
+    }];
+    UIMenu *menu = [UIMenu menuWithChildren:@[curveItem, rectangleItem]];
+    return menu;
+}
+
 
 @end

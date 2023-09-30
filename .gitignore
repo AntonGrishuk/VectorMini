@@ -2,3 +2,5 @@ Pods/*
 Podfile.lock
 VectorMini.xcworkspace/*
 VectorMini.xcodeproj/xcuserdata/**
+VectorMini.xcodeproj/project.xcworkspace/xcuserdata/**
+VectorMini.xcodeproj/project.xcworkspace/**

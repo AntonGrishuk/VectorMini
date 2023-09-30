@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Project.h"
+#import "CanvasModel.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -15,6 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CanvasViewController : UIViewController
 
 - (instancetype)initWithDrawObjects:(Project *)project;
+- (void)selectTool:(ToolType)type;
+
 @end
+
+
 
 NS_ASSUME_NONNULL_END

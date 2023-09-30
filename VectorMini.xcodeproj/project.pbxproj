@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 53;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,6 +11,8 @@
 		725EB43F2A757DF60087A59F /* CurveObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 725EB43E2A757DF60087A59F /* CurveObject.m */; };
 		7288C15D2A59EFCF00211974 /* ProjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7288C15C2A59EFCF00211974 /* ProjectCell.m */; };
 		7297126B2A76DF3A00B7ACD5 /* ProjectsStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7297126A2A76DF3A00B7ACD5 /* ProjectsStorage.m */; };
+		72BCC1542ABCE3BB00D834E2 /* RectangleObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 72BCC1532ABCE3BB00D834E2 /* RectangleObject.m */; };
+		72F93A922A92CF6B003FA5FA /* CanvasModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 72F93A912A92CF6B003FA5FA /* CanvasModel.m */; };
 		950E72FE2323BCAA005736D1 /* UIBezierPath+Interpolation.m in Sources */ = {isa = PBXBuildFile; fileRef = 950E72FB2323BCAA005736D1 /* UIBezierPath+Interpolation.m */; };
 		950E72FF2323BCAA005736D1 /* CGPointExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 950E72FD2323BCAA005736D1 /* CGPointExtension.m */; };
 		951D196A231F1BD000AF62C0 /* CanvasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 951D195E231F1BD000AF62C0 /* CanvasViewController.m */; };
@@ -33,6 +35,10 @@
 		7288C15C2A59EFCF00211974 /* ProjectCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProjectCell.m; sourceTree = "<group>"; };
 		729712692A76DF3A00B7ACD5 /* ProjectsStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProjectsStorage.h; sourceTree = "<group>"; };
 		7297126A2A76DF3A00B7ACD5 /* ProjectsStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProjectsStorage.m; sourceTree = "<group>"; };
+		72BCC1522ABCE3BB00D834E2 /* RectangleObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RectangleObject.h; sourceTree = "<group>"; };
+		72BCC1532ABCE3BB00D834E2 /* RectangleObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RectangleObject.m; sourceTree = "<group>"; };
+		72F93A902A92CF6B003FA5FA /* CanvasModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CanvasModel.h; sourceTree = "<group>"; };
+		72F93A912A92CF6B003FA5FA /* CanvasModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CanvasModel.m; sourceTree = "<group>"; };
 		950E72FA2323BCAA005736D1 /* UIBezierPath+Interpolation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+Interpolation.h"; sourceTree = "<group>"; };
 		950E72FB2323BCAA005736D1 /* UIBezierPath+Interpolation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+Interpolation.m"; sourceTree = "<group>"; };
 		950E72FC2323BCAA005736D1 /* CGPointExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGPointExtension.h; sourceTree = "<group>"; };
@@ -77,6 +83,7 @@
 		725EB43B2A757DC30087A59F /* Drawing */ = {
 			isa = PBXGroup;
 			children = (
+				72F93A8D2A92BE30003FA5FA /* RectangleObject */,
 				725EB43C2A757DE00087A59F /* CurveObject */,
 				726E47552A6C837F00E46772 /* DrawObject */,
 			);
@@ -110,9 +117,35 @@
 			path = ProjectsStorage;
 			sourceTree = "<group>";
 		};
+		72F93A8D2A92BE30003FA5FA /* RectangleObject */ = {
+			isa = PBXGroup;
+			children = (
+				72BCC1522ABCE3BB00D834E2 /* RectangleObject.h */,
+				72BCC1532ABCE3BB00D834E2 /* RectangleObject.m */,
+			);
+			path = RectangleObject;
+			sourceTree = "<group>";
+		};
+		72F93A8E2A92BE5C003FA5FA /* CanvasTopBar */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CanvasTopBar;
+			sourceTree = "<group>";
+		};
+		72F93A8F2A92CF47003FA5FA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				72F93A902A92CF6B003FA5FA /* CanvasModel.h */,
+				72F93A912A92CF6B003FA5FA /* CanvasModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		951D1956231F1BD000AF62C0 /* Canvas */ = {
 			isa = PBXGroup;
 			children = (
+				72F93A8F2A92CF47003FA5FA /* Model */,
 				951D195D231F1BD000AF62C0 /* Controllers */,
 				951D1962231F1BD000AF62C0 /* Views */,
 			);
@@ -151,13 +184,14 @@
 		951D196E231F1BD900AF62C0 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				729712682A76DF0800B7ACD5 /* ProjectsStorage */,
-				725EB43B2A757DC30087A59F /* Drawing */,
-				951D1970231F1C6800AF62C0 /* Projects */,
-				951D1965231F1BD000AF62C0 /* CategoriesAndExtensions */,
-				951D1972231F1D5700AF62C0 /* Entry point */,
-				95D098D82320635D004C7842 /* CanvasContainer */,
 				951D1956231F1BD000AF62C0 /* Canvas */,
+				95D098D82320635D004C7842 /* CanvasContainer */,
+				72F93A8E2A92BE5C003FA5FA /* CanvasTopBar */,
+				951D1965231F1BD000AF62C0 /* CategoriesAndExtensions */,
+				725EB43B2A757DC30087A59F /* Drawing */,
+				951D1972231F1D5700AF62C0 /* Entry point */,
+				951D1970231F1C6800AF62C0 /* Projects */,
+				729712682A76DF0800B7ACD5 /* ProjectsStorage */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -307,8 +341,10 @@
 				951D196A231F1BD000AF62C0 /* CanvasViewController.m in Sources */,
 				951D196C231F1BD000AF62C0 /* CanvasView.m in Sources */,
 				959AC965231AC59700BE6C9D /* AppDelegate.m in Sources */,
+				72BCC1542ABCE3BB00D834E2 /* RectangleObject.m in Sources */,
 				725EB43A2A7564320087A59F /* DrawObject.m in Sources */,
 				95D098DB232063CC004C7842 /* CanvasContainerViewController.m in Sources */,
+				72F93A922A92CF6B003FA5FA /* CanvasModel.m in Sources */,
 				950E72FE2323BCAA005736D1 /* UIBezierPath+Interpolation.m in Sources */,
 				950E72FF2323BCAA005736D1 /* CGPointExtension.m in Sources */,
 				7288C15D2A59EFCF00211974 /* ProjectCell.m in Sources */,
@@ -382,7 +418,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -436,7 +472,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -452,6 +488,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3B38VY4JLV;
 				INFOPLIST_FILE = "$(SRCROOT)/VectorMini/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -471,6 +508,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3B38VY4JLV;
 				INFOPLIST_FILE = "$(SRCROOT)/VectorMini/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

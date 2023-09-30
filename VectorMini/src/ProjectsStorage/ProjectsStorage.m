@@ -8,6 +8,7 @@
 
 #import "ProjectsStorage.h"
 #import "CurveObject.h"
+#import "RectangleObject.h"
 
 @implementation ProjectsStorage
 
@@ -29,7 +30,9 @@
                 NSUUID.class,
                 NSMutableArray.class,
                 CurveObject.class,
-                NSValue.class
+                RectangleObject.class,
+                NSValue.class,
+                NSString.class
             ]];
             Project *project = [NSKeyedUnarchiver unarchivedObjectOfClasses:usingClassesSet fromData:data error:&error];
             if (error) {
